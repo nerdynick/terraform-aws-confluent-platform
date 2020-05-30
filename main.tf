@@ -13,7 +13,12 @@ module "cp-aws-zookeeper" {
     dns_ttl = var.zookeeper_dns_ttl
     name_template = var.zookeeper_name_template
     dns_template = var.zookeeper_dns_template
+    sg_name = var.zookeeper_sg_name
+    kafka_broker_sg_id = module.cp-aws-kafka_broker.security_group.id
+    
     extra_template_vars = var.extra_template_vars
+    vpc_id = var.vpc_id
+    enable_sg_creation = var.enable_sg_creation
 }
 
 module "cp-aws-kafka_broker" {
@@ -31,7 +36,16 @@ module "cp-aws-kafka_broker" {
     dns_ttl = var.kafka_broker_dns_ttl
     name_template = var.kafka_broker_name_template
     dns_template = var.kafka_broker_dns_template
+    sg_name = var.kafka_broker_sg_name
+    kafka_connect_sg_ids = [module.cp-aws-kafka_connect.security_group.id]
+    ksql_sg_ids = [module.cp-aws-ksql.security_group.id]
+    rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group.id
+    schema_registry_sg_id = module.cp-aws-schema_registry.security_group.id
+    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    
     extra_template_vars = var.extra_template_vars
+    vpc_id = var.vpc_id
+    enable_sg_creation = var.enable_sg_creation
 }
 
 module "cp-aws-kafka_connect" {
@@ -49,7 +63,12 @@ module "cp-aws-kafka_connect" {
     dns_ttl = var.kafka_connect_dns_ttl
     name_template = var.kafka_connect_name_template
     dns_template = var.kafka_connect_dns_template
+    sg_name = var.kafka_connect_sg_name
+    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    
     extra_template_vars = var.extra_template_vars
+    vpc_id = var.vpc_id
+    enable_sg_creation = var.enable_sg_creation
 }
 
 module "cp-aws-control_center" {
@@ -67,7 +86,11 @@ module "cp-aws-control_center" {
     dns_ttl = var.control_center_dns_ttl
     name_template = var.control_center_name_template
     dns_template = var.control_center_dns_template
+    sg_name = var.control_center_sg_name
+    
     extra_template_vars = var.extra_template_vars
+    vpc_id = var.vpc_id
+    enable_sg_creation = var.enable_sg_creation
 }
 
 module "cp-aws-ksql" {
@@ -85,7 +108,12 @@ module "cp-aws-ksql" {
     dns_ttl = var.ksql_dns_ttl
     name_template = var.ksql_name_template
     dns_template = var.ksql_dns_template
+    sg_name = var.ksql_sg_name
+    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    
     extra_template_vars = var.extra_template_vars
+    vpc_id = var.vpc_id
+    enable_sg_creation = var.enable_sg_creation
 }
 
 module "cp-aws-rest_proxy" {
@@ -103,7 +131,11 @@ module "cp-aws-rest_proxy" {
     dns_ttl = var.rest_proxy_dns_ttl
     name_template = var.rest_proxy_name_template
     dns_template = var.rest_proxy_dns_template
+    sg_name = var.rest_proxy_sg_name
+    
     extra_template_vars = var.extra_template_vars
+    vpc_id = var.vpc_id
+    enable_sg_creation = var.enable_sg_creation
 }
 
 module "cp-aws-schema_registry" {
@@ -121,5 +153,14 @@ module "cp-aws-schema_registry" {
     dns_ttl = var.schema_registry_dns_ttl
     name_template = var.schema_registry_name_template
     dns_template = var.schema_registry_dns_template
+    sg_name = var.schema_registry_sg_name
+    kafka_connect_sg_ids = [module.cp-aws-kafka_connect.security_group.id]
+    ksql_sg_ids = [module.cp-aws-ksql.security_group.id]
+    rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group.id
+    schema_registry_sg_id = module.cp-aws-schema_registry.security_group.id
+    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    
     extra_template_vars = var.extra_template_vars
+    vpc_id = var.vpc_id
+    enable_sg_creation = var.enable_sg_creation
 }

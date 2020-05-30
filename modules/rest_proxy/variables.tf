@@ -55,3 +55,16 @@ variable "extra_template_vars" {
     type = map
     default = {}
 }
+
+#SG Related Vars
+variable "vpc_id" {
+    type = string
+}
+variable "enable_sg_creation" {
+    type = boolean
+    default = true
+}
+variable "sg_name" {
+    type = string
+    default = "CP_REST_Proxy"
+}

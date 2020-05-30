@@ -23,8 +23,15 @@ resource "aws_instance" "instance" {
     vpc_security_group_ids = var.security_groups_ids
     
 
-    tags = merge(var.tags, {"name"=data.template_file.node_name[count.index].rendered, "Name"=data.template_file.node_name[count.index].rendered})
-    volume_tags = merge(var.tags, {"name"=data.template_file.node_name[count.index].rendered, "Name"=data.template_file.node_name[count.index].rendered})
+    tags = merge(var.tags, {
+        "name"=data.template_file.node_name[count.index].rendered, 
+        "Name"=data.template_file.node_name[count.index].rendered
+    })
+    
+    volume_tags = merge(var.tags, {
+        "name"=data.template_file.node_name[count.index].rendered, 
+        "Name"=data.template_file.node_name[count.index].rendered
+    })
 
     root_block_device {
         volume_size = var.root_volume_size

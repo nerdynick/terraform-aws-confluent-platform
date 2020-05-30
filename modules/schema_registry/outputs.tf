@@ -1,7 +1,11 @@
 output "instances" {
-    value = module.cp-aws-schema_registry.instances
+    value = module.my_instance.instances
 }
 
 output "dns_records" {
-    value = module.cp-aws-schema_registry.dns_records
+    value = module.my_instance.dns_records
+}
+
+output "security_group" {
+    value = aws_security_group.my_security_group
 }

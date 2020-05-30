@@ -1,7 +1,31 @@
-###########################
-# Connect Resources
-###########################
-module "cp-aws-kafka_connect" {
+resource "aws_security_group" "my_security_group" {
+    count = var.enable_sg_creation ? 1 : 0
+    name = var.sg_name
+    description = "Confluent Platform - Kafka Connect"
+    vpc_id = var.vpc_id
+    
+    tags = var.tags
+    
+    #Kafka Connect Related
+    ingress {
+        description = "Connect - REST Interface - Internal"
+        from_port   = 8083
+        to_port     = 8083
+        protocol    = "tcp"
+        self        =  true
+    }
+    ingress {
+        description = "Connect - REST Interface - External"
+        from_port   = 8083
+        to_port     = 8083
+        protocol    = "tcp"
+        security_groups = [
+            var.control_center_sg_id
+        ]
+    }
+}
+
+module "my_instance" {
     source = "../base_node"
     
     extra_template_vars = var.extra_template_vars
