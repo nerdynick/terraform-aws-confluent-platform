@@ -18,7 +18,7 @@ module "cp-aws-zookeeper" {
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
-    enable_sg_creation = var.enable_sg_creation
+    enable_sg_creation = var.enable_sg_creation ? var.zookeeper_enable_sg_creation : false
 }
 
 module "cp-aws-kafka_broker" {
@@ -45,7 +45,7 @@ module "cp-aws-kafka_broker" {
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
-    enable_sg_creation = var.enable_sg_creation
+    enable_sg_creation = var.enable_sg_creation ? var.kafka_broker_enable_sg_creation : false
 }
 
 module "cp-aws-kafka_connect" {
@@ -68,7 +68,7 @@ module "cp-aws-kafka_connect" {
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
-    enable_sg_creation = var.enable_sg_creation
+    enable_sg_creation = var.enable_sg_creation ? var.kafka_connect_enable_sg_creation : false
 }
 
 module "cp-aws-control_center" {
@@ -90,7 +90,7 @@ module "cp-aws-control_center" {
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
-    enable_sg_creation = var.enable_sg_creation
+    enable_sg_creation = var.enable_sg_creation ? var.control_center_enable_sg_creation : false
 }
 
 module "cp-aws-ksql" {
@@ -113,7 +113,7 @@ module "cp-aws-ksql" {
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
-    enable_sg_creation = var.enable_sg_creation
+    enable_sg_creation = var.enable_sg_creation ? var.ksql_enable_sg_creation : false
 }
 
 module "cp-aws-rest_proxy" {
@@ -135,7 +135,7 @@ module "cp-aws-rest_proxy" {
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
-    enable_sg_creation = var.enable_sg_creation
+    enable_sg_creation = var.enable_sg_creation ? var.rest_proxy_enable_sg_creation : false
 }
 
 module "cp-aws-schema_registry" {
@@ -161,5 +161,5 @@ module "cp-aws-schema_registry" {
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
-    enable_sg_creation = var.enable_sg_creation
+    enable_sg_creation = var.enable_sg_creation ? var.schema_registry_enable_sg_creation : false
 }

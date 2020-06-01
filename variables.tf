@@ -68,6 +68,10 @@ variable "zookeeper_sg_name" {
     type = string
     default = "CP_REST_Proxy"
 }
+variable "zookeeper_enable_sg_creation" {
+    type = bool
+    default = true
+}
 
 ###########################
 # Broker Vars
@@ -126,6 +130,10 @@ variable "kafka_broker_dns_template" {
 variable "kafka_broker_sg_name" {
     type = string
     default = "CP_REST_Proxy"
+}
+variable "kafka_broker_enable_sg_creation" {
+    type = bool
+    default = true
 }
 
 ###########################
@@ -186,6 +194,10 @@ variable "kafka_connect_sg_name" {
     type = string
     default = "CP_REST_Proxy"
 }
+variable "kafka_connect_enable_sg_creation" {
+    type = bool
+    default = true
+}
 
 ###########################
 # Control Center Vars
@@ -244,6 +256,10 @@ variable "control_center_dns_template" {
 variable "control_center_sg_name" {
     type = string
     default = "CP_REST_Proxy"
+}
+variable "control_center_enable_sg_creation" {
+    type = bool
+    default = true
 }
 
 ###########################
@@ -304,6 +320,10 @@ variable "ksql_sg_name" {
     type = string
     default = "CP_REST_Proxy"
 }
+variable "ksql_enable_sg_creation" {
+    type = bool
+    default = true
+}
 
 ###########################
 # RESTProxy Vars
@@ -363,6 +383,10 @@ variable "rest_proxy_sg_name" {
     type = string
     default = "CP_REST_Proxy"
 }
+variable "rest_proxy_enable_sg_creation" {
+    type = bool
+    default = true
+}
 
 ###########################
 # Schema Registry Vars
@@ -421,4 +445,8 @@ variable "schema_registry_dns_template" {
 variable "schema_registry_sg_name" {
     type = string
     default = "CP_REST_Proxy"
+}
+variable "schema_registry_enable_sg_creation" {
+    type = bool
+    default = true
 }
