@@ -14,7 +14,7 @@ module "cp-aws-zookeeper" {
     name_template = var.zookeeper_name_template
     dns_template = var.zookeeper_dns_template
     sg_name = var.zookeeper_sg_name
-    kafka_broker_sg_id = module.cp-aws-kafka_broker.security_group.id
+    kafka_broker_sg_id = module.cp-aws-kafka_broker.security_group
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
@@ -37,11 +37,11 @@ module "cp-aws-kafka_broker" {
     name_template = var.kafka_broker_name_template
     dns_template = var.kafka_broker_dns_template
     sg_name = var.kafka_broker_sg_name
-    kafka_connect_sg_ids = [module.cp-aws-kafka_connect.security_group.id]
-    ksql_sg_ids = [module.cp-aws-ksql.security_group.id]
-    rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group.id
-    schema_registry_sg_id = module.cp-aws-schema_registry.security_group.id
-    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    kafka_connect_sg_ids = [module.cp-aws-kafka_connect.security_group]
+    ksql_sg_ids = [module.cp-aws-ksql.security_group]
+    rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group
+    schema_registry_sg_id = module.cp-aws-schema_registry.security_group
+    control_center_sg_id = module.cp-aws-control_center.security_group
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
@@ -64,7 +64,7 @@ module "cp-aws-kafka_connect" {
     name_template = var.kafka_connect_name_template
     dns_template = var.kafka_connect_dns_template
     sg_name = var.kafka_connect_sg_name
-    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    control_center_sg_id = module.cp-aws-control_center.security_group
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
@@ -109,7 +109,7 @@ module "cp-aws-ksql" {
     name_template = var.ksql_name_template
     dns_template = var.ksql_dns_template
     sg_name = var.ksql_sg_name
-    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    control_center_sg_id = module.cp-aws-control_center.security_group
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
@@ -154,10 +154,10 @@ module "cp-aws-schema_registry" {
     name_template = var.schema_registry_name_template
     dns_template = var.schema_registry_dns_template
     sg_name = var.schema_registry_sg_name
-    kafka_connect_sg_ids = [module.cp-aws-kafka_connect.security_group.id]
-    ksql_sg_ids = [module.cp-aws-ksql.security_group.id]
-    rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group.id
-    control_center_sg_id = module.cp-aws-control_center.security_group.id
+    kafka_connect_sg_ids = [module.cp-aws-kafka_connect.security_group]
+    ksql_sg_ids = [module.cp-aws-ksql.security_group]
+    rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group
+    control_center_sg_id = module.cp-aws-control_center.security_group
     
     extra_template_vars = var.extra_template_vars
     vpc_id = var.vpc_id
