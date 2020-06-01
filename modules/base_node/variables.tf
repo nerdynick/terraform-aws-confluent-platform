@@ -50,6 +50,11 @@ variable "dns_ttl" {
     default = "300"
     description = "Default DNS record TTL"
 }
+variable "enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
+}
 
 variable "name_template" {
     type = string

@@ -25,6 +25,11 @@ variable "default_tags" {
 variable "dns_zone_id" {
     type = string
 }
+variable "enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
+}
 
 ###########################
 # Zookeeper Vars
@@ -92,6 +97,11 @@ variable "zookeeper_sg_name" {
 variable "zookeeper_enable_sg_creation" {
     type = bool
     default = true
+}
+variable "zookeeper_enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
 }
 
 ###########################
@@ -161,6 +171,11 @@ variable "kafka_broker_enable_sg_creation" {
     type = bool
     default = true
 }
+variable "kafka_broker_enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
+}
 
 ###########################
 # Connect Vars
@@ -228,6 +243,11 @@ variable "kafka_connect_sg_name" {
 variable "kafka_connect_enable_sg_creation" {
     type = bool
     default = true
+}
+variable "kafka_connect_enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
 }
 
 ###########################
@@ -297,6 +317,11 @@ variable "control_center_enable_sg_creation" {
     type = bool
     default = true
 }
+variable "control_center_enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
+}
 
 ###########################
 # KSQL Vars
@@ -364,6 +389,11 @@ variable "ksql_sg_name" {
 variable "ksql_enable_sg_creation" {
     type = bool
     default = true
+}
+variable "ksql_enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
 }
 
 ###########################
@@ -433,6 +463,11 @@ variable "rest_proxy_enable_sg_creation" {
     type = bool
     default = true
 }
+variable "rest_proxy_enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
+}
 
 ###########################
 # Schema Registry Vars
@@ -500,4 +535,9 @@ variable "schema_registry_sg_name" {
 variable "schema_registry_enable_sg_creation" {
     type = bool
     default = true
+}
+variable "schema_registry_enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
 }

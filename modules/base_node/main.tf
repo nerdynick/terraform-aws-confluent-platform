@@ -40,7 +40,7 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_route53_record" "dns_record" {
-    count   = var.servers
+    count   = var.enable_dns_creation ? var.servers : 0
     zone_id = var.dns_zone_id
     name    = data.template_file.node_dns[count.index].rendered
     type    = "CNAME"

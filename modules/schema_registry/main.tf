@@ -43,4 +43,5 @@ module "my_instance" {
     dns_ttl = var.dns_ttl
     name_template = var.name_template
     dns_template = var.dns_template
+    enable_dns_creation = var.enable_dns_creation
 }

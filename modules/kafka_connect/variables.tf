@@ -52,6 +52,11 @@ variable "dns_template" {
     type = string
     default = "$${name}"
 }
+variable "enable_dns_creation" {
+    type = bool
+    default = true
+    description = "Generate Route53 entries for all created resources"
+}
 variable "extra_template_vars" {
     type = map
     default = {}
