@@ -15,6 +15,9 @@ variable "enable_sg_creation" {
     type = bool
     default = true
 }
+variable "key_pair" {
+    type = string
+}
 
 ###########################
 # Zookeeper Vars
@@ -39,6 +42,7 @@ variable "zookeeper_root_volume_size" {
 }
 variable "zookeeper_key_pair" {
     type = string
+    default = ""
 }
 variable "zookeeper_tags" {
     type = map
@@ -104,6 +108,7 @@ variable "kafka_broker_root_volume_size" {
 }
 variable "kafka_broker_key_pair" {
     type = string
+    default = ""
 }
 variable "kafka_broker_tags" {
     type = map
@@ -169,6 +174,7 @@ variable "kafka_connect_root_volume_size" {
 }
 variable "kafka_connect_key_pair" {
     type = string
+    default = ""
 }
 variable "kafka_connect_tags" {
     type = map
@@ -234,6 +240,7 @@ variable "control_center_root_volume_size" {
 }
 variable "control_center_key_pair" {
     type = string
+    default = ""
 }
 variable "control_center_tags" {
     type = map
@@ -299,6 +306,7 @@ variable "ksql_root_volume_size" {
 }
 variable "ksql_key_pair" {
     type = string
+    default = ""
 }
 variable "ksql_tags" {
     type = map
@@ -364,6 +372,7 @@ variable "rest_proxy_root_volume_size" {
 }
 variable "rest_proxy_key_pair" {
     type = string
+    default = ""
 }
 variable "rest_proxy_tags" {
     type = map
@@ -429,6 +438,7 @@ variable "schema_registry_root_volume_size" {
 }
 variable "schema_registry_key_pair" {
     type = string
+    default = ""
 }
 variable "schema_registry_tags" {
     type = map
