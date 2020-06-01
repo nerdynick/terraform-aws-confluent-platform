@@ -22,6 +22,9 @@ variable "default_tags" {
     type = map
     default = {}
 }
+variable "dns_zone_id" {
+    type = string
+}
 
 ###########################
 # Zookeeper Vars
@@ -67,6 +70,7 @@ variable "zookeeper_security_groups_ids" {
 #DNS Related Vars
 variable "zookeeper_dns_zone_id" {
     type = string
+    default = ""
 }
 variable "zookeeper_dns_ttl" {
     type = string
@@ -134,6 +138,7 @@ variable "kafka_broker_security_groups_ids" {
 #DNS Related Vars
 variable "kafka_broker_dns_zone_id" {
     type = string
+    default = ""
 }
 variable "kafka_broker_dns_ttl" {
     type = string
@@ -201,6 +206,7 @@ variable "kafka_connect_security_groups_ids" {
 #DNS Related Vars
 variable "kafka_connect_dns_zone_id" {
     type = string
+    default = ""
 }
 variable "kafka_connect_dns_ttl" {
     type = string
@@ -268,6 +274,7 @@ variable "control_center_security_groups_ids" {
 #DNS Related Vars
 variable "control_center_dns_zone_id" {
     type = string
+    default = ""
 }
 variable "control_center_dns_ttl" {
     type = string
@@ -335,6 +342,7 @@ variable "ksql_security_groups_ids" {
 #DNS Related Vars
 variable "ksql_dns_zone_id" {
     type = string
+    default = ""
 }
 variable "ksql_dns_ttl" {
     type = string
@@ -402,6 +410,7 @@ variable "rest_proxy_security_groups_ids" {
 #DNS Related Vars
 variable "rest_proxy_dns_zone_id" {
     type = string
+    default = ""
 }
 variable "rest_proxy_dns_ttl" {
     type = string
@@ -469,6 +478,7 @@ variable "schema_registry_security_groups_ids" {
 #DNS Related Vars
 variable "schema_registry_dns_zone_id" {
     type = string
+    default = ""
 }
 variable "schema_registry_dns_ttl" {
     type = string

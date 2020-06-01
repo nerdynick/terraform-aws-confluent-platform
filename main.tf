@@ -9,7 +9,7 @@ module "cp-aws-zookeeper" {
     tags = merge(var.default_tags, var.zookeeper_tags)
     subnet_id = var.zookeeper_subnet_id == "" ? var.subnet_id : var.zookeeper_subnet_id
     security_groups_ids = var.zookeeper_security_groups_ids
-    dns_zone_id = var.zookeeper_dns_zone_id
+    dns_zone_id = var.zookeeper_dns_zone_id == "" ? var.dns_zone_id : var.zookeeper_dns_zone_id
     dns_ttl = var.zookeeper_dns_ttl
     name_template = var.zookeeper_name_template
     dns_template = var.zookeeper_dns_template
@@ -32,7 +32,7 @@ module "cp-aws-kafka_broker" {
     tags = merge(var.default_tags, var.kafka_broker_tags)
     subnet_id = var.kafka_broker_subnet_id == "" ? var.subnet_id : var.kafka_broker_subnet_id
     security_groups_ids = var.kafka_broker_security_groups_ids
-    dns_zone_id = var.kafka_broker_dns_zone_id
+    dns_zone_id = var.kafka_broker_dns_zone_id == "" ? var.dns_zone_id : var.kafka_broker_dns_zone_id
     dns_ttl = var.kafka_broker_dns_ttl
     name_template = var.kafka_broker_name_template
     dns_template = var.kafka_broker_dns_template
@@ -59,7 +59,7 @@ module "cp-aws-kafka_connect" {
     tags = merge(var.default_tags, var.kafka_connect_tags)
     subnet_id = var.kafka_connect_subnet_id == "" ? var.subnet_id : var.kafka_connect_subnet_id
     security_groups_ids = var.kafka_connect_security_groups_ids
-    dns_zone_id = var.kafka_connect_dns_zone_id
+    dns_zone_id = var.kafka_connect_dns_zone_id == "" ? var.dns_zone_id : var.kafka_connect_dns_zone_id
     dns_ttl = var.kafka_connect_dns_ttl
     name_template = var.kafka_connect_name_template
     dns_template = var.kafka_connect_dns_template
@@ -82,7 +82,7 @@ module "cp-aws-control_center" {
     tags = merge(var.default_tags, var.control_center_tags)
     subnet_id = var.control_center_subnet_id == "" ? var.subnet_id : var.control_center_subnet_id
     security_groups_ids = var.control_center_security_groups_ids
-    dns_zone_id = var.control_center_dns_zone_id
+    dns_zone_id = var.control_center_dns_zone_id == "" ? var.dns_zone_id : var.control_center_dns_zone_id
     dns_ttl = var.control_center_dns_ttl
     name_template = var.control_center_name_template
     dns_template = var.control_center_dns_template
@@ -104,7 +104,7 @@ module "cp-aws-ksql" {
     tags = merge(var.default_tags, var.ksql_tags)
     subnet_id = var.ksql_subnet_id == "" ? var.subnet_id : var.ksql_subnet_id
     security_groups_ids = var.ksql_security_groups_ids
-    dns_zone_id = var.ksql_dns_zone_id
+    dns_zone_id = var.ksql_dns_zone_id == "" ? var.dns_zone_id : var.ksql_dns_zone_id
     dns_ttl = var.ksql_dns_ttl
     name_template = var.ksql_name_template
     dns_template = var.ksql_dns_template
@@ -127,7 +127,7 @@ module "cp-aws-rest_proxy" {
     tags = merge(var.default_tags, var.rest_proxy_tags)
     subnet_id = var.rest_proxy_subnet_id == "" ? var.subnet_id : var.rest_proxy_subnet_id
     security_groups_ids = var.rest_proxy_security_groups_ids
-    dns_zone_id = var.rest_proxy_dns_zone_id
+    dns_zone_id = var.rest_proxy_dns_zone_id == "" ? var.dns_zone_id : var.rest_proxy_dns_zone_id
     dns_ttl = var.rest_proxy_dns_ttl
     name_template = var.rest_proxy_name_template
     dns_template = var.rest_proxy_dns_template
@@ -149,7 +149,7 @@ module "cp-aws-schema_registry" {
     tags = merge(var.default_tags, var.schema_registry_tags)
     subnet_id = var.schema_registry_subnet_id == "" ? var.subnet_id : var.schema_registry_subnet_id
     security_groups_ids = var.schema_registry_security_groups_ids
-    dns_zone_id = var.schema_registry_dns_zone_id
+    dns_zone_id = var.schema_registry_dns_zone_id == "" ? var.dns_zone_id : var.schema_registry_dns_zone_id
     dns_ttl = var.schema_registry_dns_ttl
     name_template = var.schema_registry_name_template
     dns_template = var.schema_registry_dns_template
