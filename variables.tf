@@ -18,6 +18,10 @@ variable "enable_sg_creation" {
 variable "key_pair" {
     type = string
 }
+variable "default_tags" {
+    type = map
+    default = {}
+}
 
 ###########################
 # Zookeeper Vars
@@ -46,6 +50,7 @@ variable "zookeeper_key_pair" {
 }
 variable "zookeeper_tags" {
     type = map
+    default = {}
 }
 
 #Network Related Vars
@@ -112,6 +117,7 @@ variable "kafka_broker_key_pair" {
 }
 variable "kafka_broker_tags" {
     type = map
+    default = {}
 }
 
 #Network Related Vars
@@ -178,6 +184,7 @@ variable "kafka_connect_key_pair" {
 }
 variable "kafka_connect_tags" {
     type = map
+    default = {}
 }
 
 #Network Related Vars
@@ -244,6 +251,7 @@ variable "control_center_key_pair" {
 }
 variable "control_center_tags" {
     type = map
+    default = {}
 }
 
 #Network Related Vars
@@ -310,6 +318,7 @@ variable "ksql_key_pair" {
 }
 variable "ksql_tags" {
     type = map
+    default = {}
 }
 
 #Network Related Vars
@@ -376,6 +385,7 @@ variable "rest_proxy_key_pair" {
 }
 variable "rest_proxy_tags" {
     type = map
+    default = {}
 }
 
 #Network Related Vars
@@ -442,6 +452,7 @@ variable "schema_registry_key_pair" {
 }
 variable "schema_registry_tags" {
     type = map
+    default = {}
 }
 
 #Network Related Vars

@@ -6,7 +6,7 @@ module "cp-aws-zookeeper" {
     instance_type = var.zookeeper_instance_type
     root_volume_size = var.zookeeper_root_volume_size
     key_pair = var.zookeeper_key_pair == "" ? var.key_pair : var.zookeeper_key_pair
-    tags = var.zookeeper_tags
+    tags = merge(var.default_tags, var.zookeeper_tags)
     subnet_id = var.zookeeper_subnet_id == "" ? var.subnet_id : var.zookeeper_subnet_id
     security_groups_ids = var.zookeeper_security_groups_ids
     dns_zone_id = var.zookeeper_dns_zone_id
@@ -29,7 +29,7 @@ module "cp-aws-kafka_broker" {
     instance_type = var.kafka_broker_instance_type
     root_volume_size = var.kafka_broker_root_volume_size
     key_pair = var.kafka_broker_key_pair == "" ? var.key_pair : var.kafka_broker_key_pair
-    tags = var.kafka_broker_tags
+    tags = merge(var.default_tags, var.kafka_broker_tags)
     subnet_id = var.kafka_broker_subnet_id == "" ? var.subnet_id : var.kafka_broker_subnet_id
     security_groups_ids = var.kafka_broker_security_groups_ids
     dns_zone_id = var.kafka_broker_dns_zone_id
@@ -56,7 +56,7 @@ module "cp-aws-kafka_connect" {
     instance_type = var.kafka_connect_instance_type
     root_volume_size = var.kafka_connect_root_volume_size
     key_pair = var.kafka_connect_key_pair == "" ? var.key_pair : var.kafka_connect_key_pair
-    tags = var.kafka_connect_tags
+    tags = merge(var.default_tags, var.kafka_connect_tags)
     subnet_id = var.kafka_connect_subnet_id == "" ? var.subnet_id : var.kafka_connect_subnet_id
     security_groups_ids = var.kafka_connect_security_groups_ids
     dns_zone_id = var.kafka_connect_dns_zone_id
@@ -79,7 +79,7 @@ module "cp-aws-control_center" {
     instance_type = var.control_center_instance_type
     root_volume_size = var.control_center_root_volume_size
     key_pair = var.control_center_key_pair == "" ? var.key_pair : var.control_center_key_pair
-    tags = var.control_center_tags
+    tags = merge(var.default_tags, var.control_center_tags)
     subnet_id = var.control_center_subnet_id == "" ? var.subnet_id : var.control_center_subnet_id
     security_groups_ids = var.control_center_security_groups_ids
     dns_zone_id = var.control_center_dns_zone_id
@@ -101,7 +101,7 @@ module "cp-aws-ksql" {
     instance_type = var.ksql_instance_type
     root_volume_size = var.ksql_root_volume_size
     key_pair = var.ksql_key_pair == "" ? var.key_pair : var.ksql_key_pair
-    tags = var.ksql_tags
+    tags = merge(var.default_tags, var.ksql_tags)
     subnet_id = var.ksql_subnet_id == "" ? var.subnet_id : var.ksql_subnet_id
     security_groups_ids = var.ksql_security_groups_ids
     dns_zone_id = var.ksql_dns_zone_id
@@ -124,7 +124,7 @@ module "cp-aws-rest_proxy" {
     instance_type = var.rest_proxy_instance_type
     root_volume_size = var.rest_proxy_root_volume_size
     key_pair = var.rest_proxy_key_pair == "" ? var.key_pair : var.rest_proxy_key_pair
-    tags = var.rest_proxy_tags
+    tags = merge(var.default_tags, var.rest_proxy_tags)
     subnet_id = var.rest_proxy_subnet_id == "" ? var.subnet_id : var.rest_proxy_subnet_id
     security_groups_ids = var.rest_proxy_security_groups_ids
     dns_zone_id = var.rest_proxy_dns_zone_id
@@ -146,7 +146,7 @@ module "cp-aws-schema_registry" {
     instance_type = var.schema_registry_instance_type
     root_volume_size = var.schema_registry_root_volume_size
     key_pair = var.schema_registry_key_pair == "" ? var.key_pair : var.schema_registry_key_pair
-    tags = var.schema_registry_tags
+    tags = merge(var.default_tags, var.schema_registry_tags)
     subnet_id = var.schema_registry_subnet_id == "" ? var.subnet_id : var.schema_registry_subnet_id
     security_groups_ids = var.schema_registry_security_groups_ids
     dns_zone_id = var.schema_registry_dns_zone_id
