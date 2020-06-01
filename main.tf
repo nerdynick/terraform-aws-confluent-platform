@@ -157,7 +157,6 @@ module "cp-aws-schema_registry" {
     kafka_connect_sg_ids = [module.cp-aws-kafka_connect.security_group.id]
     ksql_sg_ids = [module.cp-aws-ksql.security_group.id]
     rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group.id
-    schema_registry_sg_id = module.cp-aws-schema_registry.security_group.id
     control_center_sg_id = module.cp-aws-control_center.security_group.id
     
     extra_template_vars = var.extra_template_vars

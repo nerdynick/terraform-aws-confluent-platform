@@ -7,5 +7,5 @@ output "dns_records" {
 }
 
 output "security_group" {
-    value = aws_security_group.my_security_group
+    value = element(aws_security_group.my_security_group, 0)
 }

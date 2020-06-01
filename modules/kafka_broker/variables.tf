@@ -62,7 +62,7 @@ variable "vpc_id" {
     type = string
 }
 variable "enable_sg_creation" {
-    type = boolean
+    type = bool
     default = true
 }
 variable "sg_name" {

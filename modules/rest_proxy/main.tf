@@ -36,7 +36,7 @@ module "my_instance" {
     key_pair = var.key_pair
     tags = var.tags
     subnet_id = var.subnet_id
-    security_groups_ids = combine(var.security_groups_ids, [aws_security_group.my_security_group.id])
+    security_groups_ids = concat(var.security_groups_ids, aws_security_group.my_security_group.*.id)
     dns_zone_id = var.dns_zone_id
     dns_ttl = var.dns_ttl
     name_template = var.name_template

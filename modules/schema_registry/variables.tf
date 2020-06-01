@@ -62,7 +62,7 @@ variable "vpc_id" {
     type = string
 }
 variable "enable_sg_creation" {
-    type = boolean
+    type = bool
     default = true
 }
 variable "sg_name" {
@@ -78,10 +78,6 @@ variable "ksql_sg_ids" {
     default = []
 }
 variable "rest_proxy_sg_id" {
-    type = string
-    default = ""
-}
-variable "schema_registry_sg_id" {
     type = string
     default = ""
 }
