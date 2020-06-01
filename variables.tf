@@ -5,6 +5,9 @@ variable "extra_template_vars" {
 variable "vpc_id" {
     type = string
 }
+variable "subnet_id" {
+    type = string
+}
 variable "enable_sg_creation" {
     type = bool
     default = true
@@ -40,6 +43,7 @@ variable "zookeeper_tags" {
 #Network Related Vars
 variable "zookeeper_subnet_id" {
     type = string
+    default = ""
 }
 
 variable "zookeeper_security_groups_ids" {
@@ -103,6 +107,7 @@ variable "kafka_broker_tags" {
 #Network Related Vars
 variable "kafka_broker_subnet_id" {
     type = string
+    default = ""
 }
 
 variable "kafka_broker_security_groups_ids" {
@@ -166,6 +171,7 @@ variable "kafka_connect_tags" {
 #Network Related Vars
 variable "kafka_connect_subnet_id" {
     type = string
+    default = ""
 }
 
 variable "kafka_connect_security_groups_ids" {
@@ -229,6 +235,7 @@ variable "control_center_tags" {
 #Network Related Vars
 variable "control_center_subnet_id" {
     type = string
+    default = ""
 }
 
 variable "control_center_security_groups_ids" {
@@ -292,6 +299,7 @@ variable "ksql_tags" {
 #Network Related Vars
 variable "ksql_subnet_id" {
     type = string
+    default = ""
 }
 
 variable "ksql_security_groups_ids" {
@@ -355,6 +363,7 @@ variable "rest_proxy_tags" {
 #Network Related Vars
 variable "rest_proxy_subnet_id" {
     type = string
+    default = ""
 }
 
 variable "rest_proxy_security_groups_ids" {
@@ -418,6 +427,7 @@ variable "schema_registry_tags" {
 #Network Related Vars
 variable "schema_registry_subnet_id" {
     type = string
+    default = ""
 }
 
 variable "schema_registry_security_groups_ids" {
