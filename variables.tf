@@ -8,6 +8,9 @@ variable "vpc_id" {
 variable "subnet_id" {
     type = string
 }
+variable "image_id" {
+    type = string
+}
 variable "enable_sg_creation" {
     type = bool
     default = true
@@ -24,6 +27,7 @@ variable "zookeeper_servers" {
 #Instance Related Vars
 variable "zookeeper_image_id" {
     type = string
+    default = ""
 }
 variable "zookeeper_instance_type" {
     type = string
@@ -88,6 +92,7 @@ variable "kafka_broker_servers" {
 #Instance Related Vars
 variable "kafka_broker_image_id" {
     type = string
+    default = ""
 }
 variable "kafka_broker_instance_type" {
     type = string
@@ -152,6 +157,7 @@ variable "kafka_connect_servers" {
 #Instance Related Vars
 variable "kafka_connect_image_id" {
     type = string
+    default = ""
 }
 variable "kafka_connect_instance_type" {
     type = string
@@ -216,6 +222,7 @@ variable "control_center_servers" {
 #Instance Related Vars
 variable "control_center_image_id" {
     type = string
+    default = ""
 }
 variable "control_center_instance_type" {
     type = string
@@ -280,6 +287,7 @@ variable "ksql_servers" {
 #Instance Related Vars
 variable "ksql_image_id" {
     type = string
+    default = ""
 }
 variable "ksql_instance_type" {
     type = string
@@ -344,6 +352,7 @@ variable "rest_proxy_servers" {
 #Instance Related Vars
 variable "rest_proxy_image_id" {
     type = string
+    default = ""
 }
 variable "rest_proxy_instance_type" {
     type = string
@@ -408,6 +417,7 @@ variable "schema_registry_servers" {
 #Instance Related Vars
 variable "schema_registry_image_id" {
     type = string
+    default = ""
 }
 variable "schema_registry_instance_type" {
     type = string

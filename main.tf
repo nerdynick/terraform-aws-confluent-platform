@@ -2,7 +2,7 @@ module "cp-aws-zookeeper" {
     source = "./modules/zookeeper"
 
     servers = var.zookeeper_servers
-    image_id = var.zookeeper_image_id
+    image_id = var.zookeeper_image_id == "" ? var.image_id : var.zookeeper_image_id
     instance_type = var.zookeeper_instance_type
     root_volume_size = var.zookeeper_root_volume_size
     key_pair = var.zookeeper_key_pair
@@ -25,7 +25,7 @@ module "cp-aws-kafka_broker" {
     source = "./modules/kafka_broker"
 
     servers = var.kafka_broker_servers
-    image_id = var.kafka_broker_image_id
+    image_id = var.kafka_broker_image_id == "" ? var.image_id : var.kafka_broker_image_id
     instance_type = var.kafka_broker_instance_type
     root_volume_size = var.kafka_broker_root_volume_size
     key_pair = var.kafka_broker_key_pair
@@ -52,7 +52,7 @@ module "cp-aws-kafka_connect" {
     source = "./modules/kafka_connect"
 
     servers = var.kafka_connect_servers
-    image_id = var.kafka_connect_image_id
+    image_id = var.kafka_connect_image_id == "" ? var.image_id : var.kafka_connect_image_id
     instance_type = var.kafka_connect_instance_type
     root_volume_size = var.kafka_connect_root_volume_size
     key_pair = var.kafka_connect_key_pair
@@ -75,7 +75,7 @@ module "cp-aws-control_center" {
     source = "./modules/control_center"
 
     servers = var.control_center_servers
-    image_id = var.control_center_image_id
+    image_id = var.control_center_image_id == "" ? var.image_id : var.control_center_image_id
     instance_type = var.control_center_instance_type
     root_volume_size = var.control_center_root_volume_size
     key_pair = var.control_center_key_pair
@@ -97,7 +97,7 @@ module "cp-aws-ksql" {
     source = "./modules/ksql"
 
     servers = var.ksql_servers
-    image_id = var.ksql_image_id
+    image_id = var.ksql_image_id == "" ? var.image_id : var.ksql_image_id
     instance_type = var.ksql_instance_type
     root_volume_size = var.ksql_root_volume_size
     key_pair = var.ksql_key_pair
@@ -120,7 +120,7 @@ module "cp-aws-rest_proxy" {
     source = "./modules/rest_proxy"
 
     servers = var.rest_proxy_servers
-    image_id = var.rest_proxy_image_id
+    image_id = var.rest_proxy_image_id == "" ? var.image_id : var.rest_proxy_image_id
     instance_type = var.rest_proxy_instance_type
     root_volume_size = var.rest_proxy_root_volume_size
     key_pair = var.rest_proxy_key_pair
@@ -142,7 +142,7 @@ module "cp-aws-schema_registry" {
     source = "./modules/schema_registry"
 
     servers = var.schema_registry_servers
-    image_id = var.schema_registry_image_id
+    image_id = var.schema_registry_image_id == "" ? var.image_id : var.schema_registry_image_id
     instance_type = var.schema_registry_instance_type
     root_volume_size = var.schema_registry_root_volume_size
     key_pair = var.schema_registry_key_pair
