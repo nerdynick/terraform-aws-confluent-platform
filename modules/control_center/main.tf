@@ -1,19 +1,16 @@
-resource "aws_security_group" "my_security_group" {
-    count = var.enable_sg_creation ? 1 : 0
-    name = var.sg_name
-    description = "Confluent Platform - Control Center"
+module "my_sec_group" {
+    source = "../base_sec_group"
+    
+    component_name = "Control Center"
+    
     vpc_id = var.vpc_id
-    
+    enable_sg_creation = var.enable_sg_creation
+    sg_name = var.sg_name
+    port_external_range = var.port_external_range
+    port_internal_range = var.port_internal_range
+    external_access_security_group_ids = var.external_access_security_group_ids
+    external_access_cidrs = var.external_access_cidrs
     tags = var.tags
-    
-    #Control Center Related
-    ingress {
-        description = "C3 - REST Interface - Internal"
-        from_port   = 9021
-        to_port     = 9021
-        protocol    = "tcp"
-        self        =  true
-    }
 }
 
 module "my_instance" {
@@ -28,7 +25,7 @@ module "my_instance" {
     key_pair = var.key_pair
     tags = var.tags
     subnet_id = var.subnet_id
-    security_groups_ids = concat(var.security_groups_ids, aws_security_group.my_security_group.*.id)
+    security_groups_ids = concat(var.security_groups_ids, [module.my_sec_group.security_group])
     dns_zone_id = var.dns_zone_id
     dns_ttl = var.dns_ttl
     name_template = var.name_template

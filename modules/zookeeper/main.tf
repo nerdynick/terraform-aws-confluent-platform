@@ -1,42 +1,18 @@
-resource "aws_security_group" "my_security_group" {
-    count = var.enable_sg_creation ? 1 : 0
-    name = var.sg_name
-    description = "Confluent Platform - Zookeeper"
+module "my_sec_group" {
+    source = "../base_sec_group"
+    
+    component_name = "Zookeeper"
+    
     vpc_id = var.vpc_id
-    
+    enable_sg_creation = var.enable_sg_creation
+    sg_name = var.sg_name
+    port_external_range = var.port_external_range
+    port_internal_range = var.port_internal_range
+    external_access_security_group_ids = concat([
+        var.kafka_broker_sg_id
+    ], var.external_access_security_group_ids)
+    external_access_cidrs = var.external_access_cidrs
     tags = var.tags
-    
-    ingress {
-        description = "Zookeeper - Internal - Client"
-        from_port   = 2181
-        to_port     = 2181
-        protocol    = "tcp"
-        self        =  true
-    }
-    
-    ingress {
-        description = "Zookeeper - External - Kafka Brokers"
-        from_port   = 2181
-        to_port     = 2181
-        protocol    = "tcp"
-        security_groups = [var.kafka_broker_sg_id]
-    }
-    
-    ingress {
-        description = "Zookeeper - Internal - Leader/Follow"
-        from_port   = 2888
-        to_port     = 2888
-        protocol    = "tcp"
-        self        =  true
-    }
-    
-    ingress {
-        description = "Zookeeper - Internal - Leader Election"
-        from_port   = 3888
-        to_port     = 3888
-        protocol    = "tcp"
-        self        =  true
-    }
 }
 
 module "my_instance" {
@@ -51,7 +27,7 @@ module "my_instance" {
     key_pair = var.key_pair
     tags = var.tags
     subnet_id = var.subnet_id
-    security_groups_ids = concat(var.security_groups_ids, aws_security_group.my_security_group.*.id)
+    security_groups_ids = concat(var.security_groups_ids, [module.my_sec_group.security_group])
     dns_zone_id = var.dns_zone_id
     dns_ttl = var.dns_ttl
     name_template = var.name_template

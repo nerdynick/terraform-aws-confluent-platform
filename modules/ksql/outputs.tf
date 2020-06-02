@@ -7,5 +7,5 @@ output "dns_records" {
 }
 
 output "security_group" {
-    value = length(aws_security_group.my_security_group) > 0 ? aws_security_group.my_security_group[0].id : ""
+    value = module.my_sec_group.security_group
 }

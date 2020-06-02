@@ -1,28 +1,18 @@
-resource "aws_security_group" "my_security_group" {
-    count = var.enable_sg_creation ? 1 : 0
-    name = var.sg_name
-    description = "Confluent Platform - ksqlDB"
+module "my_sec_group" {
+    source = "../base_sec_group"
+    
+    component_name = "KSQL"
+    
     vpc_id = var.vpc_id
-    
+    enable_sg_creation = var.enable_sg_creation
+    sg_name = var.sg_name
+    port_external_range = var.port_external_range
+    port_internal_range = var.port_internal_range
+    external_access_security_group_ids = concat([
+        var.control_center_sg_id
+    ], var.external_access_security_group_ids)
+    external_access_cidrs = var.external_access_cidrs
     tags = var.tags
-    
-    #KSQL Related
-    ingress {
-        description = "KSQL - REST Interface - Internal"
-        from_port   = 8088
-        to_port     = 8088
-        protocol    = "tcp"
-        self        =  true
-    }
-    ingress {
-        description = "KSQL - REST Interface - External"
-        from_port   = 8088
-        to_port     = 8088
-        protocol    = "tcp"
-        security_groups = [
-            var.control_center_sg_id
-        ]
-    }
 }
 
 module "my_instance" {
@@ -37,7 +27,7 @@ module "my_instance" {
     key_pair = var.key_pair
     tags = var.tags
     subnet_id = var.subnet_id
-    security_groups_ids = concat(var.security_groups_ids, aws_security_group.my_security_group.*.id)
+    security_groups_ids = concat(var.security_groups_ids, [module.my_sec_group.security_group])
     dns_zone_id = var.dns_zone_id
     dns_ttl = var.dns_ttl
     name_template = var.name_template

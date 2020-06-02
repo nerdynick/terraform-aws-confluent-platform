@@ -66,14 +66,37 @@ variable "extra_template_vars" {
 #SG Related Vars
 variable "vpc_id" {
     type = string
+    description = "VPC ID that Resources should exist in"
 }
 variable "enable_sg_creation" {
     type = bool
     default = true
+    description = "Flag to enable the creation of needed Security Group(s)"
 }
 variable "sg_name" {
     type = string
     default = "CP_Zookeeper"
+    description = "Name/Name Prefix to use when creating Security Groups(s)"
+}
+variable "port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=2181,to=2181}]
+    description = "External Port Ranges to Expose"
+}
+variable "port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=2181,to=2181},{from=2888,to=2888},{from=3888,to=3888}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
 }
 variable "kafka_broker_sg_id" {
     type = string
