@@ -92,7 +92,7 @@ variable "zookeeper_dns_template" {
 }
 variable "zookeeper_sg_name" {
     type = string
-    default = "CP_REST_Proxy"
+    default = "CP_Zookeeper"
 }
 variable "zookeeper_enable_sg_creation" {
     type = bool
@@ -102,6 +102,30 @@ variable "zookeeper_enable_dns_creation" {
     type = bool
     default = true
     description = "Generate Route53 entries for all created resources"
+}
+variable "zookeeper_port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=2181,to=2181}]
+    description = "External Port Ranges to Expose"
+}
+variable "zookeeper_port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=2181,to=2181},{from=2888,to=2888},{from=3888,to=3888}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "zookeeper_external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "zookeeper_external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
+}
+variable "kafka_broker_sg_id" {
+    type = string
+    default = ""
 }
 
 ###########################
@@ -165,7 +189,27 @@ variable "kafka_broker_dns_template" {
 }
 variable "kafka_broker_sg_name" {
     type = string
-    default = "CP_REST_Proxy"
+    default = "CP_Kafka_Broker"
+}
+variable "kafka_broker_port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=9091,to=9093},{from:8090,to:8091}]
+    description = "External Port Ranges to Expose"
+}
+variable "kafka_broker_port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=9091,to=9092},{from:8090,to:8091}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "kafka_broker_external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "kafka_broker_external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
 }
 variable "kafka_broker_enable_sg_creation" {
     type = bool
@@ -238,7 +282,7 @@ variable "kafka_connect_dns_template" {
 }
 variable "kafka_connect_sg_name" {
     type = string
-    default = "CP_REST_Proxy"
+    default = "CP_Kafka_Connect"
 }
 variable "kafka_connect_enable_sg_creation" {
     type = bool
@@ -248,6 +292,26 @@ variable "kafka_connect_enable_dns_creation" {
     type = bool
     default = true
     description = "Generate Route53 entries for all created resources"
+}
+variable "kafka_connect_port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8083,to=8083}]
+    description = "External Port Ranges to Expose"
+}
+variable "kafka_connect_port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8083,to=8083}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "kafka_connect_external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "kafka_connect_external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
 }
 
 ###########################
@@ -311,7 +375,7 @@ variable "control_center_dns_template" {
 }
 variable "control_center_sg_name" {
     type = string
-    default = "CP_REST_Proxy"
+    default = "CP_Control_Center"
 }
 variable "control_center_enable_sg_creation" {
     type = bool
@@ -321,6 +385,26 @@ variable "control_center_enable_dns_creation" {
     type = bool
     default = true
     description = "Generate Route53 entries for all created resources"
+}
+variable "control_center_port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=9021,to=9021}]
+    description = "External Port Ranges to Expose"
+}
+variable "control_center_port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=9021,to=9021}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "control_center_external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "control_center_external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
 }
 
 ###########################
@@ -384,7 +468,7 @@ variable "ksql_dns_template" {
 }
 variable "ksql_sg_name" {
     type = string
-    default = "CP_REST_Proxy"
+    default = "CP_KSQL"
 }
 variable "ksql_enable_sg_creation" {
     type = bool
@@ -394,6 +478,26 @@ variable "ksql_enable_dns_creation" {
     type = bool
     default = true
     description = "Generate Route53 entries for all created resources"
+}
+variable "ksql_port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8088,to=8088}]
+    description = "External Port Ranges to Expose"
+}
+variable "ksql_port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8088,to=8088}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "ksql_external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "ksql_external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
 }
 
 ###########################
@@ -468,6 +572,26 @@ variable "rest_proxy_enable_dns_creation" {
     default = true
     description = "Generate Route53 entries for all created resources"
 }
+variable "rest_proxy_port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8082,to=8082}]
+    description = "External Port Ranges to Expose"
+}
+variable "rest_proxy_port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8082,to=8082}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "rest_proxy_external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "rest_proxy_external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
+}
 
 ###########################
 # Schema Registry Vars
@@ -530,7 +654,7 @@ variable "schema_registry_dns_template" {
 }
 variable "schema_registry_sg_name" {
     type = string
-    default = "CP_REST_Proxy"
+    default = "CP_Schema_Registry"
 }
 variable "schema_registry_enable_sg_creation" {
     type = bool
@@ -540,4 +664,24 @@ variable "schema_registry_enable_dns_creation" {
     type = bool
     default = true
     description = "Generate Route53 entries for all created resources"
+}
+variable "schema_registry_port_external_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8081,to=8081}]
+    description = "External Port Ranges to Expose"
+}
+variable "schema_registry_port_internal_range" {
+    type = list(object({from=number,to=number}))
+    default = [{from=8081,to=8081}]
+    description = "Internal Port Ranges to Expose"
+}
+variable "schema_registry_external_access_security_group_ids" {
+    type = list
+    default = []
+    description = "Other Security Groups you will tro grant access to the externalized ports"
+}
+variable "schema_registry_external_access_cidrs" {
+    type = list
+    default = []
+    description = "CIDRs you will tro grant access to the externalized ports"
 }

@@ -20,6 +20,11 @@ module "cp-aws-zookeeper" {
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.zookeeper_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.zookeeper_enable_dns_creation
+    
+    port_external_range = var.zookeeper_port_external_range
+    port_internal_range = var.zookeeper_port_internal_range
+    external_access_security_group_ids = var.zookeeper_external_access_security_group_ids
+    external_access_cidrs = var.zookeeper_external_access_cidrs
 }
 
 module "cp-aws-kafka_broker" {
@@ -48,6 +53,11 @@ module "cp-aws-kafka_broker" {
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.kafka_broker_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.kafka_broker_enable_dns_creation
+    
+    port_external_range = var.kafka_broker_port_external_range
+    port_internal_range = var.kafka_broker_port_internal_range
+    external_access_security_group_ids = var.kafka_broker_external_access_security_group_ids
+    external_access_cidrs = var.kafka_broker_external_access_cidrs
 }
 
 module "cp-aws-kafka_connect" {
@@ -72,6 +82,11 @@ module "cp-aws-kafka_connect" {
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.kafka_connect_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.kafka_connect_enable_dns_creation
+    
+    port_external_range = var.kafka_connect_port_external_range
+    port_internal_range = var.kafka_connect_port_internal_range
+    external_access_security_group_ids = var.kafka_connect_external_access_security_group_ids
+    external_access_cidrs = var.kafka_connect_external_access_cidrs
 }
 
 module "cp-aws-control_center" {
@@ -95,6 +110,11 @@ module "cp-aws-control_center" {
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.control_center_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.control_center_enable_dns_creation
+    
+    port_external_range = var.control_center_port_external_range
+    port_internal_range = var.control_center_port_internal_range
+    external_access_security_group_ids = var.control_center_external_access_security_group_ids
+    external_access_cidrs = var.control_center_external_access_cidrs
 }
 
 module "cp-aws-ksql" {
@@ -119,6 +139,11 @@ module "cp-aws-ksql" {
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.ksql_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.ksql_enable_dns_creation
+    
+    port_external_range = var.ksql_port_external_range
+    port_internal_range = var.ksql_port_internal_range
+    external_access_security_group_ids = var.ksql_external_access_security_group_ids
+    external_access_cidrs = var.ksql_external_access_cidrs
 }
 
 module "cp-aws-rest_proxy" {
@@ -142,6 +167,11 @@ module "cp-aws-rest_proxy" {
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.rest_proxy_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.rest_proxy_enable_dns_creation
+    
+    port_external_range = var.rest_proxy_port_external_range
+    port_internal_range = var.rest_proxy_port_internal_range
+    external_access_security_group_ids = var.rest_proxy_external_access_security_group_ids
+    external_access_cidrs = var.rest_proxy_external_access_cidrs
 }
 
 module "cp-aws-schema_registry" {
@@ -169,4 +199,9 @@ module "cp-aws-schema_registry" {
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.schema_registry_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.schema_registry_enable_dns_creation
+    
+    port_external_range = var.schema_registry_port_external_range
+    port_internal_range = var.schema_registry_port_internal_range
+    external_access_security_group_ids = var.schema_registry_external_access_security_group_ids
+    external_access_cidrs = var.schema_registry_external_access_cidrs
 }
