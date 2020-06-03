@@ -69,7 +69,7 @@ module "cp-aws-kafka_connect" {
     root_volume_size = var.kafka_connect_root_volume_size
     key_pair = var.kafka_connect_key_pair == "" ? var.key_pair : var.kafka_connect_key_pair
     tags = merge(var.default_tags, var.kafka_connect_tags)
-    subnet_id = var.kafka_connect_subnet_id == "" ? var.subnet_id : var.kafka_connect_subnet_id
+    subnet_ids = length(var.kafka_connect_subnet_ids) <= 0 ? [var.subnet_id] : var.kafka_connect_subnet_ids
     security_groups_ids = var.kafka_connect_security_groups_ids
     dns_zone_id = var.kafka_connect_dns_zone_id == "" ? var.dns_zone_id : var.kafka_connect_dns_zone_id
     dns_ttl = var.kafka_connect_dns_ttl

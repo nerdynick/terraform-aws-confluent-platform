@@ -252,9 +252,9 @@ variable "kafka_connect_tags" {
 }
 
 #Network Related Vars
-variable "kafka_connect_subnet_id" {
-    type = string
-    default = ""
+variable "kafka_connect_subnet_ids" {
+    type = list(string)
+    default = []
 }
 
 variable "kafka_connect_security_groups_ids" {

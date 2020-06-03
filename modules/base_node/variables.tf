@@ -71,3 +71,8 @@ variable "extra_template_vars" {
     default = {}
     description = "Default set of additional template vars to include when rendering the `dns_template` and `name_template`. Note `name` and `itemcount` are reserved names." 
 }
+
+variable "lb_target_groups" {
+    type = list(string)
+    default = []
+}

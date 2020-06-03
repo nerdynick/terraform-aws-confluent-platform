@@ -26,8 +26,8 @@ variable "tags" {
 }
 
 #Network Related Vars
-variable "subnet_id" {
-    type = string
+variable "subnet_ids" {
+    type = list(string)
 }
 
 variable "security_groups_ids" {
@@ -77,6 +77,14 @@ variable "sg_name" {
     default = "CP_Kafka_Connect"
     description = "Name/Name Prefix to use when creating Security Groups(s)"
 }
+variable "port_external_https" {
+    type = list(number)
+    default = []
+}
+variable "port_external_https_certificate_arn" {
+    type = string
+    default = null
+}
 variable "port_external_range" {
     type = list(object({from=number,to=number}))
     default = [{from=8083,to=8083}]
@@ -100,4 +108,26 @@ variable "external_access_cidrs" {
 variable "control_center_sg_id" {
     type = string
     default = ""
+}
+
+#LB specific related configs
+variable "enable_lb_creation" {
+    type = bool
+    default = true
+    description = "Flag to enable the creation of needed Application Load Balancer(s)"
+}
+variable "lb_name" {
+    type = string
+    default = "CP-Kafka-Connect"
+    description = "Name/Name Prefix to use with LB resources"
+}
+variable "lb_internal" {
+    type = bool
+    default = false
+    description = "Weather or not the LB should be for internal only use"
+}
+variable "lb_idle_timeout" {
+    type = number
+    default = 60
+    description = "Idle connection timeout"
 }
