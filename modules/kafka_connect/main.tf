@@ -23,61 +23,33 @@ locals {
 }
 
 module "my_lb" {
-    source  = "terraform-aws-modules/alb/aws"
-    version = "5.6.0"
+    source = "../base_lb"
     
     vpc_id = var.vpc_id
     subnets = var.subnet_ids
-    enable_cross_zone_load_balancing = false #Will want to auto set is multi-subnets are provided in the future.
-    load_balancer_type = "application"
-    security_groups = concat(var.security_groups_ids, [module.my_sec_group.security_group])
-    tags = merge(var.tags, {
-        Name: var.lb_name
-    })
+    tags = var.tags
+    enable_lb_creation = var.enable_lb_creation ? (var.servers > 0) : false
     
-    create_lb = var.enable_lb_creation ? (var.servers > 0) : false
-    name = var.lb_name
-    internal = var.lb_internal
-    idle_timeout = var.lb_idle_timeout
-    
-    target_groups = [
+    lb_name = var.lb_name
+    lb_internal = var.lb_internal
+    lb_idle_timeout = var.lb_idle_timeout
+    security_groups_ids = concat(var.security_groups_ids, [module.my_sec_group.security_group])
+    port_external_http = [
         for port in local.external_ports:
-        {
-            backend_port = port
-            backend_protocol = contains(var.port_external_https, port) ? "HTTPS" : "HTTP"
-            health_check = {
-                enabled             = true
-                interval            = 30
-                path                = "/"
-                port                = port
-                healthy_threshold   = 3
-                unhealthy_threshold = 3
-                timeout             = 6
-                protocol            = contains(var.port_external_https, port) ? "HTTPS" : "HTTP"
-                matcher             = "200-299"
-            }
-        }
-    ]
-    
-    http_tcp_listeners = [
-        for port in local.external_ports:
-        {
-            port: port,
-            protocol: "HTTP",
-            target_group_index: index(local.external_ports, port)
-        }
+        port
         if contains(var.port_external_https, port) == false
     ]
-    https_listeners = [
-        for port in local.external_ports:
-        {
-            port: port,
-            protocol: "HTTPS",
-            target_group_index: index(local.external_ports, port)
-            certificate_arn: var.port_external_https_certificate_arn
-        }
-        if contains(var.port_external_https, port)
-    ]
+    port_external_https = var.port_external_https
+    port_external_https_certificate_arn = var.port_external_https_certificate_arn
+    
+    
+    health_check = {
+        path: "/"
+        healthy_threshold: 3
+        unhealthy_threshold: 3
+        timeout: 6
+        matcher: "200-299"
+    }
 }
 
 module "my_instance" {

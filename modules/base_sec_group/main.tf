@@ -1,4 +1,4 @@
-resource "aws_security_group" "my_security_group" {
+resource "aws_security_group" "security_group" {
     count = var.enable_sg_creation ? 1 : 0
     name = var.sg_name
     description = "Confluent Platform - ${var.component_name}"
