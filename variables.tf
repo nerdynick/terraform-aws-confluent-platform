@@ -5,8 +5,13 @@ variable "extra_template_vars" {
 variable "vpc_id" {
     type = string
 }
-variable "subnet_id" {
-    type = string
+variable "subnet_ids" {
+    type = list(string)
+}
+variable "multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 variable "image_id" {
     type = string
@@ -14,6 +19,10 @@ variable "image_id" {
 variable "enable_sg_creation" {
     type = bool
     default = true
+}
+variable "security_groups_ids" {
+    type = list(string)
+    default = []
 }
 variable "key_pair" {
     type = string
@@ -30,6 +39,7 @@ variable "enable_dns_creation" {
     default = true
     description = "Generate Route53 entries for all created resources"
 }
+
 
 ###########################
 # Zookeeper Vars
@@ -62,9 +72,14 @@ variable "zookeeper_tags" {
 }
 
 #Network Related Vars
-variable "zookeeper_subnet_id" {
-    type = string
-    default = ""
+variable "zookeeper_subnet_ids" {
+    type = list(string)
+    default = []
+}
+variable "zookeeper_multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
 variable "zookeeper_security_groups_ids" {
@@ -159,9 +174,14 @@ variable "kafka_broker_tags" {
 }
 
 #Network Related Vars
-variable "kafka_broker_subnet_id" {
-    type = string
-    default = ""
+variable "kafka_broker_subnet_ids" {
+    type = list(string)
+    default = []
+}
+variable "kafka_broker_multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
 variable "kafka_broker_security_groups_ids" {
@@ -252,9 +272,14 @@ variable "kafka_connect_tags" {
 }
 
 #Network Related Vars
-variable "kafka_connect_subnet_id" {
-    type = string
-    default = ""
+variable "kafka_connect_kafka_connect_subnet_ids" {
+    type = list(string)
+    default = []
+}
+variable "multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
 variable "kafka_connect_security_groups_ids" {
@@ -345,9 +370,14 @@ variable "control_center_tags" {
 }
 
 #Network Related Vars
-variable "control_center_subnet_id" {
-    type = string
-    default = ""
+variable "control_center_subnet_ids" {
+    type = list(string)
+    default = []
+}
+variable "control_center_multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
 variable "control_center_security_groups_ids" {
@@ -438,9 +468,14 @@ variable "ksql_tags" {
 }
 
 #Network Related Vars
-variable "ksql_subnet_id" {
-    type = string
-    default = ""
+variable "ksql_subnet_ids" {
+    type = list(string)
+    default = []
+}
+variable "ksql_multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
 variable "ksql_security_groups_ids" {
@@ -531,9 +566,14 @@ variable "rest_proxy_tags" {
 }
 
 #Network Related Vars
-variable "rest_proxy_subnet_id" {
-    type = string
-    default = ""
+variable "rest_proxy_subnet_ids" {
+    type = list(string)
+    default = []
+}
+variable "rest_proxy_multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
 variable "rest_proxy_security_groups_ids" {
@@ -624,9 +664,14 @@ variable "schema_registry_tags" {
 }
 
 #Network Related Vars
-variable "schema_registry_subnet_id" {
-    type = string
-    default = ""
+variable "schema_registry_subnet_ids" {
+    type = list(string)
+    default = []
+}
+variable "schema_registry_multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
 variable "schema_registry_security_groups_ids" {

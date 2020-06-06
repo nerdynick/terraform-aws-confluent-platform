@@ -29,13 +29,18 @@ variable "tags" {
 }
 
 #Network Related Vars
-variable "subnet_id" {
-    type = string
-    description = "Subnet where all instances should live within"
+variable "multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
+}
+variable "subnet_ids" {
+    type = list(string)
+    description = "Subnets where all instances should live within"
 }
 
 variable "security_groups_ids" {
-    type = list
+    type = list(string)
     default = []
     description = "Extra security groups that you wish to have the instances added to"
 }

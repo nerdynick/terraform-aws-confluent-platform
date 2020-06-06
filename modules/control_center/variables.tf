@@ -26,10 +26,15 @@ variable "tags" {
     default = {}
     description = "What tags to assign to the Security Group(s) and EC2 instances"
 }
+variable "multi_az" {
+    type = bool
+    default = true
+    description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
+}
 
 #Network Related Vars
-variable "subnet_id" {
-    type = string
+variable "subnet_ids" {
+    type = list(string)
 }
 
 variable "security_groups_ids" {
