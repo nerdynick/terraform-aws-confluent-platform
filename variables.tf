@@ -272,11 +272,11 @@ variable "kafka_connect_tags" {
 }
 
 #Network Related Vars
-variable "kafka_connect_kafka_connect_subnet_ids" {
+variable "kafka_connect_subnet_ids" {
     type = list(string)
     default = []
 }
-variable "multi_az" {
+variable "kafka_connect_multi_az" {
     type = bool
     default = true
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"

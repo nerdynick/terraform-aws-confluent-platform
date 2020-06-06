@@ -19,7 +19,7 @@ resource "aws_instance" "instance" {
     ami             = var.image_id
     instance_type   = var.instance_type
     key_name        = var.key_pair
-    subnet_id       = var.multi_az ? var.subnet_ids[(count.index%len(var.subnet_ids))] : element(var.subnet_ids, 0)
+    subnet_id       = var.multi_az ? var.subnet_ids[(count.index%length(var.subnet_ids))] : element(var.subnet_ids, 0)
     vpc_security_group_ids = var.security_groups_ids
     
 
