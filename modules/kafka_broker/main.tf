@@ -42,7 +42,7 @@ module "my_instance" {
             name:"data", 
             device_name:var.vol_data_device_name, 
             encrypted:false, 
-            kms__key_id=null, 
+            kms_key_id="", 
             size:var.vol_data_size, 
             type: var.vol_data_type == null ? (var.vol_data_size > 500 ? "st1" : "gp2") : var.vol_data_type, 
             tags:{}

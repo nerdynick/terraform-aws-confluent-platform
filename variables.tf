@@ -155,6 +155,7 @@ variable "zookeeper_extra_ebs_volumes" {
         type: string,
         tags: map(string)
     }))
+    default = []
 }
 
 variable "zookeeper_vol_trans_log_size" {
@@ -284,6 +285,7 @@ variable "kafka_broker_extra_ebs_volumes" {
         type: string,
         tags: map(string)
     }))
+    default = []
 }
 
 variable "kafka_broker_vol_data_size" {
@@ -507,6 +509,7 @@ variable "control_center_extra_ebs_volumes" {
         type: string,
         tags: map(string)
     }))
+    default = []
 }
 
 variable "control_center_vol_data_size" {
@@ -628,6 +631,7 @@ variable "ksql_extra_ebs_volumes" {
         type: string,
         tags: map(string)
     }))
+    default = []
 }
 
 variable "ksql_vol_data_size" {

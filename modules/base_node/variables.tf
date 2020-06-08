@@ -88,4 +88,5 @@ variable "ebs_volumes" {
         type: string,
         tags: map(string)
     }))
+    default = []
 }

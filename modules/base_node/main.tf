@@ -49,15 +49,15 @@ resource "aws_ebs_volume" "instance_volume" {
     size = local.volumes_to_mount[count.index][1].size
     type = local.volumes_to_mount[count.index][1].type
     kms_key_id = local.volumes_to_mount[count.index][1].kms_key_id
-    tag = merge(var.tags, local.volumes_to_mount[count.index][1].tags, {
-        Name:  local.volumes_to_mount[count.index][1].name
+    tags = merge(var.tags, local.volumes_to_mount[count.index][1].tags, {
+        Name:  "${local.volumes_to_mount[count.index][0].tags["Name"]}-${local.volumes_to_mount[count.index][1].name}"
     })
 }
 
 resource "aws_volume_attachment" "instance_volume_attach" {
     count = length(local.volumes_to_mount)
     
-    device_name = local.volumes_to_mount[count.index][0].device_name
+    device_name = local.volumes_to_mount[count.index][1].device_name
     volume_id = aws_ebs_volume.instance_volume[count.index].id
     instance_id = local.volumes_to_mount[count.index][0].id
 }

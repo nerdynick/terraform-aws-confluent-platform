@@ -37,6 +37,6 @@ module "my_instance" {
     
     
     ebs_volumes = concat([
-        {name:"data", device_name:var.vol_data_device_name, encrypted:false, kms__key_id=null, size:var.vol_data_size, type:"gp2", tags:{}}
+        {name:"data", device_name:var.vol_data_device_name, encrypted:false, kms_key_id="", size:var.vol_data_size, type:"gp2", tags:{}}
     ], var.extra_ebs_volumes)
 }
