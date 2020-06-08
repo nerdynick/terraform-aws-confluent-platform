@@ -20,7 +20,7 @@ variable "enable_sg_creation" {
     type = bool
     default = true
 }
-variable "security_groups_ids" {
+variable "security_group_ids" {
     type = list(string)
     default = []
 }
@@ -82,7 +82,7 @@ variable "zookeeper_multi_az" {
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
-variable "zookeeper_security_groups_ids" {
+variable "zookeeper_security_group_ids" {
     type = list
     default = []
 }
@@ -215,7 +215,7 @@ variable "kafka_broker_multi_az" {
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
-variable "kafka_broker_security_groups_ids" {
+variable "kafka_broker_security_group_ids" {
     type = list
     default = []
 }
@@ -340,7 +340,7 @@ variable "kafka_connect_multi_az" {
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
-variable "kafka_connect_security_groups_ids" {
+variable "kafka_connect_security_group_ids" {
     type = list
     default = []
 }
@@ -438,7 +438,7 @@ variable "control_center_multi_az" {
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
-variable "control_center_security_groups_ids" {
+variable "control_center_security_group_ids" {
     type = list
     default = []
 }
@@ -559,7 +559,7 @@ variable "ksql_multi_az" {
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
-variable "ksql_security_groups_ids" {
+variable "ksql_security_group_ids" {
     type = list
     default = []
 }
@@ -680,7 +680,7 @@ variable "rest_proxy_multi_az" {
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
-variable "rest_proxy_security_groups_ids" {
+variable "rest_proxy_security_group_ids" {
     type = list
     default = []
 }
@@ -778,7 +778,7 @@ variable "schema_registry_multi_az" {
     description = "Should all the instances be proportianently spread among all the Subnets or just stay in the first subnet"
 }
 
-variable "schema_registry_security_groups_ids" {
+variable "schema_registry_security_group_ids" {
     type = list
     default = []
 }

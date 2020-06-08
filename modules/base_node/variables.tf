@@ -39,7 +39,7 @@ variable "subnet_ids" {
     description = "Subnets where all instances should live within"
 }
 
-variable "security_groups_ids" {
+variable "security_group_ids" {
     type = list(string)
     default = []
     description = "Extra security groups that you wish to have the instances added to"

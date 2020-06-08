@@ -37,7 +37,7 @@ variable "subnet_ids" {
     type = list(string)
 }
 
-variable "security_groups_ids" {
+variable "security_group_ids" {
     type = list
     default = []
 }
