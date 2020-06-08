@@ -76,3 +76,16 @@ variable "extra_template_vars" {
     default = {}
     description = "Default set of additional template vars to include when rendering the `dns_template` and `name_template`. Note `name` and `itemcount` are reserved names." 
 }
+
+#EBS Volumes
+variable "ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+}

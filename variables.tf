@@ -143,6 +143,37 @@ variable "kafka_broker_sg_id" {
     default = ""
 }
 
+
+#EBS Volumes
+variable "zookeeper_extra_ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+}
+
+variable "zookeeper_vol_trans_log_size" {
+    type = number
+    default = 500
+}
+variable "zookeeper_vol_trans_log_device_name" {
+    type = string
+    default = "/dev/sdf"
+}
+variable "zookeeper_vol_storage_size" {
+    type = number
+    default = 500
+}
+variable "zookeeper_vol_storage_device_name" {
+    type = string
+    default = "/dev/sdg"
+}
+
 ###########################
 # Broker Vars
 ###########################
@@ -239,6 +270,33 @@ variable "kafka_broker_enable_dns_creation" {
     type = bool
     default = true
     description = "Generate Route53 entries for all created resources"
+}
+
+
+#EBS Volumes
+variable "kafka_broker_extra_ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+}
+
+variable "kafka_broker_vol_data_size" {
+    type = number
+    default = 500
+}
+variable "kafka_broker_vol_data_device_name" {
+    type = string
+    default = "/dev/sdf"
+}
+variable "kafka_broker_vol_data_type" {
+    type = string
+    default = null
 }
 
 ###########################
@@ -437,6 +495,29 @@ variable "control_center_external_access_cidrs" {
     description = "CIDRs you will tro grant access to the externalized ports"
 }
 
+
+#EBS Volumes
+variable "control_center_extra_ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+}
+
+variable "control_center_vol_data_size" {
+    type = number
+    default = 300
+}
+variable "control_center_vol_data_device_name" {
+    type = string
+    default = "/dev/sdf"
+}
+
 ###########################
 # KSQL Vars
 ###########################
@@ -533,6 +614,29 @@ variable "ksql_external_access_cidrs" {
     type = list
     default = []
     description = "CIDRs you will tro grant access to the externalized ports"
+}
+
+
+#EBS Volumes
+variable "ksql_extra_ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+}
+
+variable "ksql_vol_data_size" {
+    type = number
+    default = 100
+}
+variable "ksql_vol_data_device_name" {
+    type = string
+    default = "/dev/sdf"
 }
 
 ###########################

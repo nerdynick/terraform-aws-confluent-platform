@@ -107,3 +107,34 @@ variable "kafka_broker_sg_id" {
     type = string
     default = ""
 }
+
+
+#EBS Volumes
+variable "extra_ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+}
+
+variable "vol_trans_log_size" {
+    type = number
+    default = 500
+}
+variable "vol_trans_log_device_name" {
+    type = string
+    default = "/dev/sdf"
+}
+variable "vol_storage_size" {
+    type = number
+    default = 500
+}
+variable "vol_storage_device_name" {
+    type = string
+    default = "/dev/sdg"
+}

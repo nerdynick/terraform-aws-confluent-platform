@@ -26,6 +26,12 @@ module "cp-aws-zookeeper" {
     port_internal_range = var.zookeeper_port_internal_range
     external_access_security_group_ids = var.zookeeper_external_access_security_group_ids
     external_access_cidrs = var.zookeeper_external_access_cidrs
+    
+    extra_ebs_volumes = var.zookeeper_extra_ebs_volumes
+    vol_trans_log_size = var.zookeeper_vol_trans_log_size
+    vol_trans_log_device_name = var.zookeeper_vol_trans_log_device_name
+    vol_storage_size = var.zookeeper_vol_storage_size
+    vol_storage_device_name = var.zookeeper_vol_storage_device_name
 }
 
 module "cp-aws-kafka_broker" {
@@ -60,6 +66,11 @@ module "cp-aws-kafka_broker" {
     port_internal_range = var.kafka_broker_port_internal_range
     external_access_security_group_ids = var.kafka_broker_external_access_security_group_ids
     external_access_cidrs = var.kafka_broker_external_access_cidrs
+    
+    extra_ebs_volumes = var.kafka_broker_extra_ebs_volumes
+    vol_data_size = var.kafka_broker_vol_data_size
+    vol_data_device_name = var.kafka_broker_vol_data_device_name
+    vol_data_type = var.kafka_broker_vol_data_type
 }
 
 module "cp-aws-kafka_connect" {
@@ -119,6 +130,10 @@ module "cp-aws-control_center" {
     port_internal_range = var.control_center_port_internal_range
     external_access_security_group_ids = var.control_center_external_access_security_group_ids
     external_access_cidrs = var.control_center_external_access_cidrs
+    
+    extra_ebs_volumes = var.control_center_extra_ebs_volumes
+    vol_data_size = var.control_center_vol_data_size
+    vol_data_device_name = var.control_center_vol_data_device_name
 }
 
 module "cp-aws-ksql" {
@@ -149,6 +164,10 @@ module "cp-aws-ksql" {
     port_internal_range = var.ksql_port_internal_range
     external_access_security_group_ids = var.ksql_external_access_security_group_ids
     external_access_cidrs = var.ksql_external_access_cidrs
+    
+    extra_ebs_volumes = var.ksql_extra_ebs_volumes
+    vol_data_size = var.ksql_vol_data_size
+    vol_data_device_name = var.ksql_vol_data_device_name
 }
 
 module "cp-aws-rest_proxy" {

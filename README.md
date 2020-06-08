@@ -6,15 +6,15 @@ Terraform Module(s) for Deploying the Confluent Platform within AWS.
 
 ## Feature Metric
 
-| CP Component    | EC2 Instance | Route53 DNS | Security Groups | Load Balancers | Multi AZ | Auto Scaling Groups | Multi Cluster |
-|:--------------- |:------------:|:-----------:|:---------------:|:--------------:|:--------:|:-------------------:|:-------------:|
-| Zookeeper       | X            | X           | X               | N/A            | X        | N/A                 | N/A           |
-| Kafka Broker    | X            | X           | X               |                | X        | N/A                 | N/A           |
-| Kafka Connect   | X            | X           | X               |                | X        |                     |               |
-| ksqlDB          | X            | X           | X               |                | X        |                     |               |
-| Rest Proxy      | X            | X           | X               |                | X        |                     | N/A           |
-| Schema Registry | X            | X           | X               |                | X        | N/A                 | N/A           |
-| Control Center  | X            | X           | X               | N/A            | X        | N/A                 | N/A           |
+| CP Component    | EC2 Instance | EBS Volumes | Route53 DNS | Security Groups | Load Balancers | Multi AZ | Auto Scaling Groups | Multi Cluster |
+|:--------------- |:------------:|:------------:|:-----------:|:---------------:|:--------------:|:--------:|:-------------------:|:-------------:|
+| Zookeeper       | X            |              | X           | X               | N/A            | X        | N/A                 | N/A           |
+| Kafka Broker    | X            |              | X           | X               |                | X        | N/A                 | N/A           |
+| Kafka Connect   | X            |              | X           | X               |                | X        |                     |               |
+| ksqlDB          | X            |              | X           | X               |                | X        |                     |               |
+| Rest Proxy      | X            |              | X           | X               |                | X        |                     | N/A           |
+| Schema Registry | X            |              | X           | X               |                | X        | N/A                 | N/A           |
+| Control Center  | X            |              | X           | X               | N/A            | X        | N/A                 | N/A           |
 
 ## Feature Limitations
 

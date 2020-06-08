@@ -106,3 +106,26 @@ variable "control_center_sg_id" {
     type = string
     default = ""
 }
+
+
+#EBS Volumes
+variable "extra_ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+}
+
+variable "vol_data_size" {
+    type = number
+    default = 100
+}
+variable "vol_data_device_name" {
+    type = string
+    default = "/dev/sdf"
+}

@@ -36,4 +36,16 @@ module "my_instance" {
     name_template = var.name_template
     dns_template = var.dns_template
     enable_dns_creation = var.enable_dns_creation
+    
+    ebs_volumes = concat([
+        {
+            name:"data", 
+            device_name:var.vol_data_device_name, 
+            encrypted:false, 
+            kms__key_id=null, 
+            size:var.vol_data_size, 
+            type: var.vol_data_type == null ? (var.vol_data_size > 500 ? "st1" : "gp2") : var.vol_data_type, 
+            tags:{}
+        }
+    ], var.extra_ebs_volumes)
 }
