@@ -117,6 +117,7 @@ variable "extra_ebs_volumes" {
         type: string,
         tags: map(string)
     }))
+    default = []
 }
 
 variable "vol_data_size" {

@@ -399,6 +399,20 @@ variable "kafka_connect_external_access_cidrs" {
     description = "CIDRs you will tro grant access to the externalized ports"
 }
 
+#EBS Volumes
+variable "kafka_connect_extra_ebs_volumes" {
+    type = list(object({
+        name: string,
+        device_name: string,
+        encrypted: bool,
+        kms_key_id: string,
+        size: number,
+        type: string,
+        tags: map(string)
+    }))
+    default = []
+}
+
 ###########################
 # Control Center Vars
 ###########################

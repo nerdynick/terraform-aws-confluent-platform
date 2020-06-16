@@ -101,6 +101,8 @@ module "cp-aws-kafka_connect" {
     port_internal_range = var.kafka_connect_port_internal_range
     external_access_security_group_ids = var.kafka_connect_external_access_security_group_ids
     external_access_cidrs = var.kafka_connect_external_access_cidrs
+    
+    extra_ebs_volumes = var.kafka_connect_extra_ebs_volumes
 }
 
 module "cp-aws-control_center" {

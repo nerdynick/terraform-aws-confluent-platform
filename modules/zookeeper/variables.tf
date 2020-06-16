@@ -120,6 +120,7 @@ variable "extra_ebs_volumes" {
         type: string,
         tags: map(string)
     }))
+    default = []
 }
 
 variable "vol_trans_log_size" {

@@ -34,4 +34,7 @@ module "my_instance" {
     name_template = var.name_template
     dns_template = var.dns_template
     enable_dns_creation = var.enable_dns_creation
+    
+    
+    ebs_volumes = var.extra_ebs_volumes
 }
