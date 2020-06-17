@@ -22,3 +22,35 @@ Terraform Module(s) for Deploying the Confluent Platform within AWS.
 
 NOTE: If you leverage the individual component modules, some of these limitations can be worked around.
 These limitation just haven't be able to be baked into a single unified parent module yet, or may not be possible to at all.
+
+## Defining separate providers
+
+As of 2.4.3 you can now define separate providers for your EC2 instance creation and your DNS creation. 
+This is to support those users that may need to use separate IAM accounts to for DNS then they do to create EC2, EBS, and SecGroups.
+
+These provider alias are as follows:
+
+```
+provider "aws" {
+    alias = "default"
+}
+provider "aws" {
+    alias = "dns"
+}
+```
+
+Example of how to pass these references:
+
+```
+module "shared-cp-aws" {
+    source  = "nerdynick/confluent-platform/aws"
+    version = "2.4.4"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
+    
+    ....
+}
+```
