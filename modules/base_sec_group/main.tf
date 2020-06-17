@@ -1,4 +1,8 @@
+provider "aws" {
+    alias = "default"
+}
 resource "aws_security_group" "my_security_group" {
+    provider        = aws.default
     count = var.enable_sg_creation ? 1 : 0
     name = var.sg_name
     description = "Confluent Platform - ${var.component_name}"

@@ -1,3 +1,10 @@
+provider "aws" {
+    alias = "default"
+}
+provider "aws" {
+    alias = "dns"
+}
+
 locals {
     volumes_to_mount = setproduct(range(var.servers), var.ebs_volumes)
 }
@@ -18,6 +25,7 @@ data "template_file" "node_dns" {
     })
 }
 resource "aws_instance" "instance" {
+    provider        = aws.default
     count           = var.servers
     ami             = var.image_id
     instance_type   = var.instance_type
@@ -42,6 +50,7 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_ebs_volume" "instance_volume" {
+    provider        = aws.default
     count = length(local.volumes_to_mount)
     
     availability_zone = aws_instance.instance[local.volumes_to_mount[count.index][0]].availability_zone
@@ -55,6 +64,7 @@ resource "aws_ebs_volume" "instance_volume" {
 }
 
 resource "aws_volume_attachment" "instance_volume_attach" {
+    provider        = aws.default
     count = length(local.volumes_to_mount)
     
     device_name = local.volumes_to_mount[count.index][1].device_name
@@ -63,6 +73,7 @@ resource "aws_volume_attachment" "instance_volume_attach" {
 }
 
 resource "aws_route53_record" "dns_record" {
+    provider        = aws.dns
     count   = var.enable_dns_creation ? var.servers : 0
     zone_id = var.dns_zone_id
     name    = data.template_file.node_dns[count.index].rendered

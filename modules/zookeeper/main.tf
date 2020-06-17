@@ -1,3 +1,10 @@
+provider "aws" {
+    alias = "default"
+}
+provider "aws" {
+    alias = "dns"
+}
+
 module "my_sec_group" {
     source = "../base_sec_group"
     

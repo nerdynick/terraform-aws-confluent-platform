@@ -1,5 +1,17 @@
+provider "aws" {
+    alias = "default"
+}
+provider "aws" {
+    alias = "dns"
+}
+
 module "cp-aws-zookeeper" {
     source = "./modules/zookeeper"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
 
     servers = var.zookeeper_servers
     image_id = var.zookeeper_image_id == "" ? var.image_id : var.zookeeper_image_id
@@ -36,6 +48,11 @@ module "cp-aws-zookeeper" {
 
 module "cp-aws-kafka_broker" {
     source = "./modules/kafka_broker"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
 
     servers = var.kafka_broker_servers
     image_id = var.kafka_broker_image_id == "" ? var.image_id : var.kafka_broker_image_id
@@ -75,6 +92,11 @@ module "cp-aws-kafka_broker" {
 
 module "cp-aws-kafka_connect" {
     source = "./modules/kafka_connect"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
 
     servers = var.kafka_connect_servers
     image_id = var.kafka_connect_image_id == "" ? var.image_id : var.kafka_connect_image_id
@@ -107,6 +129,11 @@ module "cp-aws-kafka_connect" {
 
 module "cp-aws-control_center" {
     source = "./modules/control_center"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
 
     servers = var.control_center_servers
     image_id = var.control_center_image_id == "" ? var.image_id : var.control_center_image_id
@@ -140,6 +167,11 @@ module "cp-aws-control_center" {
 
 module "cp-aws-ksql" {
     source = "./modules/ksql"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
 
     servers = var.ksql_servers
     image_id = var.ksql_image_id == "" ? var.image_id : var.ksql_image_id
@@ -174,6 +206,11 @@ module "cp-aws-ksql" {
 
 module "cp-aws-rest_proxy" {
     source = "./modules/rest_proxy"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
 
     servers = var.rest_proxy_servers
     image_id = var.rest_proxy_image_id == "" ? var.image_id : var.rest_proxy_image_id
@@ -203,6 +240,11 @@ module "cp-aws-rest_proxy" {
 
 module "cp-aws-schema_registry" {
     source = "./modules/schema_registry"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
 
     servers = var.schema_registry_servers
     image_id = var.schema_registry_image_id == "" ? var.image_id : var.schema_registry_image_id

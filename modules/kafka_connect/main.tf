@@ -1,5 +1,16 @@
+provider "aws" {
+    alias = "default"
+}
+provider "aws" {
+    alias = "dns"
+}
+
 module "my_sec_group" {
     source = "../base_sec_group"
+    
+    providers = {
+        aws.default = aws.default
+    }
     
     component_name = "Kafka Connect"
     
@@ -17,6 +28,11 @@ module "my_sec_group" {
 
 module "my_instance" {
     source = "../base_node"
+    
+    providers = {
+        aws.default = aws.default
+        aws.dns = aws.dns
+    }
     
     extra_template_vars = var.extra_template_vars
     
