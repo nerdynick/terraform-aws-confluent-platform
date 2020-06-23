@@ -7,6 +7,12 @@ provider "aws" {
 
 locals {
     volumes_to_mount = setproduct(range(var.servers), var.ebs_volumes)
+    public_dns = aws_instance.instance.*.public_dns
+    private_dns = aws_instance.instance.*.private_dns
+    dns = compact(concat(local.public_dns, local.private_dns))
+    public_ip = aws_instance.instance.*.public_ip
+    private_ip = aws_instance.instance.*.private_ip
+    ips = compact(concat(local.public_ip, local.private_ip))
 }
 data "template_file" "node_name" {
     count           = var.servers
@@ -77,7 +83,7 @@ resource "aws_route53_record" "dns_record" {
     count   = var.enable_dns_creation ? var.servers : 0
     zone_id = var.dns_zone_id
     name    = data.template_file.node_dns[count.index].rendered
-    type    = "CNAME"
+    type    = length(local.dns) > 0 ? "CNAME" : "A"
     ttl     = var.dns_ttl
-    records = [element(aws_instance.instance.*.public_dns, count.index)]
+    records = [element(compact(concat([element(local.public_dns, count.index)], [element(local.private_dns, count.index)], [element(local.private_ip, count.index)], [element(local.private_ip, count.index)])), 0)]
 }
