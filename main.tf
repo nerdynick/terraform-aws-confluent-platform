@@ -44,6 +44,13 @@ module "cp-aws-zookeeper" {
     vol_trans_log_device_name = var.zookeeper_vol_trans_log_device_name
     vol_storage_size = var.zookeeper_vol_storage_size
     vol_storage_device_name = var.zookeeper_vol_storage_device_name
+
+    monitoring_security_group_ids = var.monitoring_security_group_ids
+    monitoring_cidrs = var.monitoring_cidrs
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.zookeeper_prometheus_port
+    jolokia_port = var.zookeeper_jolokia_port
 }
 
 module "cp-aws-kafka_broker" {
@@ -88,6 +95,13 @@ module "cp-aws-kafka_broker" {
     vol_data_size = var.kafka_broker_vol_data_size
     vol_data_device_name = var.kafka_broker_vol_data_device_name
     vol_data_type = var.kafka_broker_vol_data_type
+
+    monitoring_security_group_ids = var.monitoring_security_group_ids
+    monitoring_cidrs = var.monitoring_cidrs
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.kafka_broker_prometheus_port
+    jolokia_port = var.kafka_broker_jolokia_port
 }
 
 module "cp-aws-kafka_connect" {
@@ -125,6 +139,13 @@ module "cp-aws-kafka_connect" {
     external_access_cidrs = var.kafka_connect_external_access_cidrs
     
     extra_ebs_volumes = var.kafka_connect_extra_ebs_volumes
+
+    monitoring_security_group_ids = var.monitoring_security_group_ids
+    monitoring_cidrs = var.monitoring_cidrs
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.kafka_connect_prometheus_port
+    jolokia_port = var.kafka_connect_jolokia_port
 }
 
 module "cp-aws-control_center" {
@@ -202,6 +223,13 @@ module "cp-aws-ksql" {
     extra_ebs_volumes = var.ksql_extra_ebs_volumes
     vol_data_size = var.ksql_vol_data_size
     vol_data_device_name = var.ksql_vol_data_device_name
+
+    monitoring_security_group_ids = var.monitoring_security_group_ids
+    monitoring_cidrs = var.monitoring_cidrs
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.ksql_prometheus_port
+    jolokia_port = var.ksql_jolokia_port
 }
 
 module "cp-aws-rest_proxy" {
@@ -236,6 +264,13 @@ module "cp-aws-rest_proxy" {
     port_internal_range = var.rest_proxy_port_internal_range
     external_access_security_group_ids = var.rest_proxy_external_access_security_group_ids
     external_access_cidrs = var.rest_proxy_external_access_cidrs
+
+    monitoring_security_group_ids = var.monitoring_security_group_ids
+    monitoring_cidrs = var.monitoring_cidrs
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.rest_proxy_prometheus_port
+    jolokia_port = var.rest_proxy_jolokia_port
 }
 
 module "cp-aws-schema_registry" {
@@ -274,4 +309,11 @@ module "cp-aws-schema_registry" {
     port_internal_range = var.schema_registry_port_internal_range
     external_access_security_group_ids = var.schema_registry_external_access_security_group_ids
     external_access_cidrs = var.schema_registry_external_access_cidrs
+
+    monitoring_security_group_ids = var.monitoring_security_group_ids
+    monitoring_cidrs = var.monitoring_cidrs
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.schema_registry_prometheus_port
+    jolokia_port = var.schema_registry_jolokia_port
 }

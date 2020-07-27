@@ -38,3 +38,28 @@ variable "tags" {
     default = {}
     description = "What tags to assign to the Security Group(s)"
 }
+
+#Monitoring
+variable "monitoring_security_group_ids"{
+    type = list
+    default = []
+    description = "Collection of Security Groups that need access to monitoring this component"
+}
+variable "monitoring_cidrs"{
+    type = list
+    default = []
+    description = "Collection of CIDRS that need access to monitoring this component"
+}
+variable "prometheus_port" {
+    type = number
+}
+variable "prometheus_enabled" {
+    type = bool
+}
+
+variable "jolokia_port" {
+    type = number
+}
+variable "jolokia_enabled" {
+    type = bool
+}

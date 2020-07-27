@@ -90,3 +90,18 @@ variable "ebs_volumes" {
     }))
     default = []
 }
+
+#Monitoring
+variable "prometheus_port" {
+    type = number
+}
+variable "prometheus_enabled" {
+    type = bool
+}
+
+variable "jolokia_port" {
+    type = number
+}
+variable "jolokia_enabled" {
+    type = bool
+}

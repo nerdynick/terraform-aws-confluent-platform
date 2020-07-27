@@ -24,6 +24,13 @@ module "my_sec_group" {
     ], var.external_access_security_group_ids)
     external_access_cidrs = var.external_access_cidrs
     tags = var.tags
+
+    monitoring_security_group_ids = var.monitoring_security_group_ids
+    monitoring_cidrs = var.monitoring_cidrs
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.prometheus_port
+    jolokia_port = var.jolokia_port
 }
 
 module "my_instance" {
@@ -50,6 +57,11 @@ module "my_instance" {
     name_template = var.name_template
     dns_template = var.dns_template
     enable_dns_creation = var.enable_dns_creation
+
+    prometheus_enabled = var.prometheus_enabled
+    jolokia_enabled = var.jolokia_enabled
+    prometheus_port = var.prometheus_port
+    jolokia_port = var.jolokia_port
     
     
     ebs_volumes = var.extra_ebs_volumes

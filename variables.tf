@@ -40,6 +40,26 @@ variable "enable_dns_creation" {
     description = "Generate Route53 entries for all created resources"
 }
 
+#Monitoring
+variable "monitoring_security_group_ids"{
+    type = list
+    default = []
+    description = "Collection of Security Groups that need access to monitoring this component"
+}
+variable "monitoring_cidrs"{
+    type = list
+    default = []
+    description = "Collection of CIDRS that need access to monitoring this component"
+}
+variable "prometheus_enabled" {
+    type = bool
+    default = true
+}
+variable "jolokia_enabled" {
+    type = bool
+    default = true
+}
+
 
 ###########################
 # Zookeeper Vars
@@ -175,6 +195,18 @@ variable "zookeeper_vol_storage_device_name" {
     default = "/dev/sdg"
 }
 
+#Monitoring
+variable "zookeeper_prometheus_port" {
+    type = number
+    default = 8079
+    description = "Port on which the Prometheus Agent is running"
+}
+variable "zookeeper_jolokia_port" {
+    type = number
+    default = 7770
+    description = "Port on which the Jolokia Agent is running"
+}
+
 ###########################
 # Broker Vars
 ###########################
@@ -301,6 +333,18 @@ variable "kafka_broker_vol_data_type" {
     default = null
 }
 
+#Monitoring
+variable "kafka_broker_prometheus_port" {
+    type = number
+    default = 8080
+    description = "Port on which the Prometheus Agent is running"
+}
+variable "kafka_broker_jolokia_port" {
+    type = number
+    default = 7771
+    description = "Port on which the Jolokia Agent is running"
+}
+
 ###########################
 # Connect Vars
 ###########################
@@ -411,6 +455,18 @@ variable "kafka_connect_extra_ebs_volumes" {
         tags: map(string)
     }))
     default = []
+}
+
+#Monitoring
+variable "kafka_connect_prometheus_port" {
+    type = number
+    default = 8077
+    description = "Port on which the Prometheus Agent is running"
+}
+variable "kafka_connect_jolokia_port" {
+    type = number
+    default = 7773
+    description = "Port on which the Jolokia Agent is running"
 }
 
 ###########################
@@ -657,6 +713,18 @@ variable "ksql_vol_data_device_name" {
     default = "/dev/sdf"
 }
 
+#Monitoring
+variable "ksql_prometheus_port" {
+    type = number
+    default = 8076
+    description = "Port on which the Prometheus Agent is running"
+}
+variable "ksql_jolokia_port" {
+    type = number
+    default = 7774
+    description = "Port on which the Jolokia Agent is running"
+}
+
 ###########################
 # RESTProxy Vars
 ###########################
@@ -755,6 +823,18 @@ variable "rest_proxy_external_access_cidrs" {
     description = "CIDRs you will tro grant access to the externalized ports"
 }
 
+#Monitoring
+variable "rest_proxy_prometheus_port" {
+    type = number
+    default = 8075
+    description = "Port on which the Prometheus Agent is running"
+}
+variable "rest_proxy_jolokia_port" {
+    type = number
+    default = 7775
+    description = "Port on which the Jolokia Agent is running"
+}
+
 ###########################
 # Schema Registry Vars
 ###########################
@@ -851,4 +931,16 @@ variable "schema_registry_external_access_cidrs" {
     type = list
     default = []
     description = "CIDRs you will tro grant access to the externalized ports"
+}
+
+#Monitoring
+variable "schema_registry_prometheus_port" {
+    type = number
+    default = 8078
+    description = "Port on which the Prometheus Agent is running"
+}
+variable "schema_registry_jolokia_port" {
+    type = number
+    default = 7772
+    description = "Port on which the Jolokia Agent is running"
 }

@@ -120,3 +120,35 @@ variable "extra_ebs_volumes" {
     }))
     default = []
 }
+
+#Monitoring
+variable "monitoring_security_group_ids"{
+    type = list
+    default = []
+    description = "Collection of Security Groups that need access to monitoring this component"
+}
+variable "monitoring_cidrs"{
+    type = list
+    default = []
+    description = "Collection of CIDRS that need access to monitoring this component"
+}
+
+variable "prometheus_port" {
+    type = number
+    default = 8077
+    description = "Port on which the Prometheus Agent is running"
+}
+variable "prometheus_enabled" {
+    type = bool
+    default = true
+}
+
+variable "jolokia_port" {
+    type = number
+    default = 7773
+    description = "Port on which the Jolokia Agent is running"
+}
+variable "jolokia_enabled" {
+    type = bool
+    default = true
+}

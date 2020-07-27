@@ -22,6 +22,11 @@ module "my_sec_group" {
     external_access_security_group_ids = var.external_access_security_group_ids
     external_access_cidrs = var.external_access_cidrs
     tags = var.tags
+
+    prometheus_enabled = false
+    prometheus_port = 0
+    jolokia_enabled = false
+    jolokia_port = 0
 }
 
 module "my_instance" {
@@ -48,6 +53,11 @@ module "my_instance" {
     name_template = var.name_template
     dns_template = var.dns_template
     enable_dns_creation = var.enable_dns_creation
+
+    prometheus_enabled = false
+    prometheus_port = 0
+    jolokia_enabled = false
+    jolokia_port = 0
     
     ebs_volumes = concat([
         {name:"data", device_name:var.vol_data_device_name, encrypted:false, kms_key_id="", size:var.vol_data_size, type:"gp2", tags:{}}
