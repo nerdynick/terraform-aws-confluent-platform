@@ -6,15 +6,15 @@ Terraform Module(s) for Deploying the Confluent Platform within AWS.
 
 ## Feature Metric
 
-| CP Component    | EC2 Instance | EBS Volumes | Route53 DNS | Security Groups | Load Balancers | Multi AZ | Auto Scaling Groups | Multi Cluster |
-|:--------------- |:------------:|:------------:|:-----------:|:---------------:|:--------------:|:--------:|:-------------------:|:-------------:|
-| Zookeeper       | X            | X            | X           | X               | N/A            | X        | N/A                 | N/A           |
-| Kafka Broker    | X            | X            | X           | X               |                | X        | N/A                 | N/A           |
-| Kafka Connect   | X            | X            | X           | X               |                | X        |                     |               |
-| ksqlDB          | X            | X            | X           | X               |                | X        |                     |               |
-| Rest Proxy      | X            | X            | X           | X               |                | X        |                     | N/A           |
-| Schema Registry | X            | X            | X           | X               |                | X        | N/A                 | N/A           |
-| Control Center  | X            | X            | X           | X               | N/A            | X        | N/A                 | N/A           |
+| CP Component    | EC2 Instance | EBS Volumes | Route53 DNS | Security Groups | Load Balancers | Multi AZ | Auto Scaling Groups | Multi Cluster | Monitoring |
+|:--------------- |:------------:|:-----------:|:-----------:|:---------------:|:--------------:|:--------:|:-------------------:|:-------------:|:----------:|
+| Zookeeper       | X            | X           | X           | X               | N/A            | X        | N/A                 | N/A           | X          |
+| Kafka Broker    | X            | X           | X           | X               |                | X        | N/A                 | N/A           | X          |
+| Kafka Connect   | X            | X           | X           | X               |                | X        |                     |               | X          |
+| ksqlDB          | X            | X           | X           | X               |                | X        |                     |               | X          |
+| Rest Proxy      | X            | X           | X           | X               |                | X        |                     | N/A           | X          |
+| Schema Registry | X            | X           | X           | X               |                | X        | N/A                 | N/A           | X          |
+| Control Center  | X            | X           | X           | X               | N/A            | X        | N/A                 | N/A           | X          |
 
 ## Feature Limitations
 
@@ -54,3 +54,11 @@ module "shared-cp-aws" {
     ....
 }
 ```
+
+## Monitoring
+
+Currently Prometheus and Jolokia are the only supported monitoring platforms.
+The contained features around them will Setup Security Groups and EC2 instance tags appropriate to each component.
+The EC2 tags are designed to allow you to use Prometheus' EC2 Service Discovery feature, 
+[as discussed here](https://medium.com/investing-in-tech/automatic-monitoring-for-all-new-aws-instances-using-prometheus-service-discovery-97d37a5b2ea2), 
+to find each component and automaticly start reading from that component.
