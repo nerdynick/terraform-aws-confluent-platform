@@ -3,9 +3,9 @@ provider "aws" {
 }
 
 locals {
-    prometheus_port_range = var.prometheus_enabled ? {from: var.prometheus_port,to: var.prometheus_port} : {}
-    jolokia_port_range = var.jolokia_enabled ? {from: var.jolokia_port,to: var.jolokia_port} : {}
-    monitoring_port_range = [local.prometheus_port_range, local.jolokia_port_range]
+    prometheus_port_range = var.prometheus_enabled ? [{from: var.prometheus_port,to: var.prometheus_port}] : []
+    jolokia_port_range = var.jolokia_enabled ? [{from: var.jolokia_port,to: var.jolokia_port}] : []
+    monitoring_port_range = concat(local.prometheus_port_range, local.jolokia_port_range)
 }
 resource "aws_security_group" "my_security_group" {
     provider        = aws.default
