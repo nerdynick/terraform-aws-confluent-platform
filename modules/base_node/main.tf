@@ -26,6 +26,7 @@ data "template_file" "node_name" {
     template        = var.name_template
     
     vars = merge(var.extra_template_vars, {
+        "node_count" = "${count.index+1}"
         "itemcount" = "${count.index+1}"
     })
 }
@@ -33,6 +34,8 @@ data "template_file" "node_dns" {
     count           = var.servers
     template        = var.dns_template
     vars = merge(var.extra_template_vars, {
+        "node_count" = "${count.index+1}"
+        "node_name" = data.template_file.node_name[count.index].rendered
         "itemcount" = "${count.index+1}"
         "name" = data.template_file.node_name[count.index].rendered
     })

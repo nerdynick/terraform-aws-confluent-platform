@@ -1,6 +1,7 @@
 variable "extra_template_vars" {
     type = map
     default = {}
+    description = "A collection of variables to use in all template rendering."
 }
 variable "vpc_id" {
     type = string
@@ -64,7 +65,7 @@ variable "jolokia_enabled" {
 variable "user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
 
 
@@ -228,7 +229,7 @@ variable "zookeeper_user_data_template" {
 variable "zookeeper_user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the zookeeper_extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the zookeeper_extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
 
 ###########################
@@ -383,7 +384,7 @@ variable "kafka_broker_user_data_template" {
 variable "kafka_broker_user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the kafka_broker_extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the kafka_broker_extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
 
 ###########################
@@ -524,7 +525,7 @@ variable "kafka_connect_user_data_template" {
 variable "kafka_connect_user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the kafka_connect_extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the kafka_connect_extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
 
 ###########################
@@ -663,7 +664,7 @@ variable "control_center_user_data_template" {
 variable "control_center_user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the control_center_extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the control_center_extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
 
 ###########################
@@ -814,7 +815,7 @@ variable "ksql_user_data_template" {
 variable "ksql_user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the ksql_extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the ksql_extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
 
 ###########################
@@ -941,7 +942,7 @@ variable "rest_proxy_user_data_template" {
 variable "rest_proxy_user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the rest_proxy_extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the rest_proxy_extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
 
 ###########################
@@ -1068,5 +1069,5 @@ variable "schema_registry_user_data_template" {
 variable "schema_registry_user_data_template_vars" {
     type = map
     default = {}
-    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the schema_registry_extra_template_vars param."
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the schema_registry_extra_template_vars param as well as node_count, node_name, node_dns, node_devices."
 }
