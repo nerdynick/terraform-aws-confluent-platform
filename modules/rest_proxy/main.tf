@@ -5,6 +5,11 @@ provider "aws" {
     alias = "dns"
 }
 
+local {
+   component_name = "REST Proxy" 
+   component_short_name = "rest"
+}
+
 module "my_sec_group" {
     source = "../base_sec_group"
     
@@ -12,7 +17,7 @@ module "my_sec_group" {
         aws.default = aws.default
     }
     
-    component_name = "REST Proxy"
+    component_name = local.component_name
     
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation
@@ -39,7 +44,10 @@ module "my_instance" {
         aws.dns = aws.dns
     }
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge({
+        component_name = var.component_name
+        component_short_name = var.component_short_name
+    }, var.extra_template_vars)
     
     servers = var.servers
     image_id = var.image_id
@@ -60,4 +68,7 @@ module "my_instance" {
     jolokia_enabled = var.jolokia_enabled
     prometheus_port = var.prometheus_port
     jolokia_port = var.jolokia_port
+
+    user_data_template = var.user_data_template
+    user_data_template_vars = var.user_data_template_vars
 }

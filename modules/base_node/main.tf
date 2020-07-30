@@ -7,15 +7,19 @@ provider "aws" {
 
 locals {
     volumes_to_mount = setproduct(range(var.servers), var.ebs_volumes)
+
     public_dns = aws_instance.instance.*.public_dns
     private_dns = aws_instance.instance.*.private_dns
     dns = compact(concat(local.public_dns, local.private_dns))
     public_ip = aws_instance.instance.*.public_ip
     private_ip = aws_instance.instance.*.private_ip
     ips = compact(concat(local.public_ip, local.private_ip))
+
     prometheus_tags = var.prometheus_enabled ? {"PROMETHEUS_PORT": var.prometheus_port} : {}
     jolokia_tags = var.jolokia_enabled ? {"JOLOKIA_PORT": var.jolokia_port} : {}
     monitoring_tags = merge(local.jolokia_tags, local.prometheus_tags)
+
+    user_data_template_vars = merge({}, var.user_data_template_vars, var.extra_template_vars)
 }
 data "template_file" "node_name" {
     count           = var.servers
@@ -33,6 +37,16 @@ data "template_file" "node_dns" {
         "name" = data.template_file.node_name[count.index].rendered
     })
 }
+data "template_file" "user_data" {
+    count           = var.servers
+    template        = var.user_data_template
+    vars = merge(local.user_data_template_vars, {
+        "node_count" = "${count.index+1}"
+        "node_name" = data.template_file.node_name[count.index].rendered
+        "node_dns" =  data.template_file.node_dns[count.index].rendered
+        "node_devices" = var.ebs_volumes
+    })
+}
 resource "aws_instance" "instance" {
     provider        = aws.default
     count           = var.servers
@@ -41,7 +55,8 @@ resource "aws_instance" "instance" {
     key_name        = var.key_pair
     subnet_id       = var.multi_az ? var.subnet_ids[(count.index%length(var.subnet_ids))] : element(var.subnet_ids, 0)
     vpc_security_group_ids = compact(var.security_group_ids)
-    
+
+    user_data = data.template_file.user_data[count.index].rendered
 
     tags = merge(local.monitoring_tags, var.tags, { 
         "Name"=data.template_file.node_name[count.index].rendered

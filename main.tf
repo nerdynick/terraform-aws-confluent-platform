@@ -29,7 +29,9 @@ module "cp-aws-zookeeper" {
     sg_name = var.zookeeper_sg_name
     kafka_broker_sg_id = module.cp-aws-kafka_broker.security_group
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge(var.zookeeper_extra_template_vars, var.extra_template_vars)
+    user_data_template_vars = merge(var.zookeeper_user_data_template_vars, var.user_data_template_vars)
+    user_data_template = var.zookeeper_user_data_template
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.zookeeper_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.zookeeper_enable_dns_creation
@@ -81,7 +83,9 @@ module "cp-aws-kafka_broker" {
     schema_registry_sg_id = module.cp-aws-schema_registry.security_group
     control_center_sg_id = module.cp-aws-control_center.security_group
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge(var.kafka_broker_extra_template_vars, var.extra_template_vars)
+    user_data_template_vars = merge(var.kafka_broker_user_data_template_vars, var.user_data_template_vars)
+    user_data_template = var.kafka_broker_user_data_template
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.kafka_broker_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.kafka_broker_enable_dns_creation
@@ -128,7 +132,9 @@ module "cp-aws-kafka_connect" {
     sg_name = var.kafka_connect_sg_name
     control_center_sg_id = module.cp-aws-control_center.security_group
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge(var.kafka_connect_extra_template_vars, var.extra_template_vars)
+    user_data_template_vars = merge(var.kafka_connect_user_data_template_vars, var.user_data_template_vars)
+    user_data_template = var.kafka_connect_user_data_template
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.kafka_connect_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.kafka_connect_enable_dns_creation
@@ -171,7 +177,9 @@ module "cp-aws-control_center" {
     dns_template = var.control_center_dns_template
     sg_name = var.control_center_sg_name
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge(var.control_center_extra_template_vars, var.extra_template_vars)
+    user_data_template_vars = merge(var.control_center_user_data_template_vars, var.user_data_template_vars)
+    user_data_template = var.control_center_user_data_template
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.control_center_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.control_center_enable_dns_creation
@@ -210,7 +218,9 @@ module "cp-aws-ksql" {
     sg_name = var.ksql_sg_name
     control_center_sg_id = module.cp-aws-control_center.security_group
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge(var.ksql_extra_template_vars, var.extra_template_vars)
+    user_data_template_vars = merge(var.ksql_user_data_template_vars, var.user_data_template_vars)
+    user_data_template = var.ksql_user_data_template
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.ksql_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.ksql_enable_dns_creation
@@ -255,7 +265,9 @@ module "cp-aws-rest_proxy" {
     dns_template = var.rest_proxy_dns_template
     sg_name = var.rest_proxy_sg_name
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge(var.rest_proxy_extra_template_vars, var.extra_template_vars)
+    user_data_template_vars = merge(var.rest_proxy_user_data_template_vars, var.user_data_template_vars)
+    user_data_template = var.rest_proxy_user_data_template
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.rest_proxy_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.rest_proxy_enable_dns_creation
@@ -300,7 +312,9 @@ module "cp-aws-schema_registry" {
     rest_proxy_sg_id = module.cp-aws-rest_proxy.security_group
     control_center_sg_id = module.cp-aws-control_center.security_group
     
-    extra_template_vars = var.extra_template_vars
+    extra_template_vars = merge(var.schema_registry_extra_template_vars, var.extra_template_vars)
+    user_data_template_vars = merge(var.schema_registry_user_data_template_vars, var.user_data_template_vars)
+    user_data_template = var.schema_registry_user_data_template
     vpc_id = var.vpc_id
     enable_sg_creation = var.enable_sg_creation ? var.schema_registry_enable_sg_creation : false
     enable_dns_creation = var.enable_dns_creation && var.schema_registry_enable_dns_creation

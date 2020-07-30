@@ -128,3 +128,16 @@ variable "vol_data_device_name" {
     type = string
     default = "/dev/sdf"
 }
+
+#User Data
+variable "user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the extra_template_vars param."
+}

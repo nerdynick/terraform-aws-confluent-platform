@@ -60,6 +60,13 @@ variable "jolokia_enabled" {
     default = true
 }
 
+#User Data
+variable "user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the extra_template_vars param."
+}
+
 
 ###########################
 # Zookeeper Vars
@@ -207,6 +214,23 @@ variable "zookeeper_jolokia_port" {
     description = "Port on which the Jolokia Agent is running"
 }
 
+#User Data
+variable "zookeeper_extra_template_vars" {
+    type = map
+    default = {}
+}
+variable "zookeeper_user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "zookeeper_user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the zookeeper_extra_template_vars param."
+}
+
 ###########################
 # Broker Vars
 ###########################
@@ -345,6 +369,23 @@ variable "kafka_broker_jolokia_port" {
     description = "Port on which the Jolokia Agent is running"
 }
 
+#User Data
+variable "kafka_broker_extra_template_vars" {
+    type = map
+    default = {}
+}
+variable "kafka_broker_user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "kafka_broker_user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the kafka_broker_extra_template_vars param."
+}
+
 ###########################
 # Connect Vars
 ###########################
@@ -469,6 +510,23 @@ variable "kafka_connect_jolokia_port" {
     description = "Port on which the Jolokia Agent is running"
 }
 
+#User Data
+variable "kafka_connect_extra_template_vars" {
+    type = map
+    default = {}
+}
+variable "kafka_connect_user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "kafka_connect_user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the kafka_connect_extra_template_vars param."
+}
+
 ###########################
 # Control Center Vars
 ###########################
@@ -589,6 +647,23 @@ variable "control_center_vol_data_size" {
 variable "control_center_vol_data_device_name" {
     type = string
     default = "/dev/sdf"
+}
+
+#User Data
+variable "control_center_extra_template_vars" {
+    type = map
+    default = {}
+}
+variable "control_center_user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "control_center_user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the control_center_extra_template_vars param."
 }
 
 ###########################
@@ -725,6 +800,23 @@ variable "ksql_jolokia_port" {
     description = "Port on which the Jolokia Agent is running"
 }
 
+#User Data
+variable "ksql_extra_template_vars" {
+    type = map
+    default = {}
+}
+variable "ksql_user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "ksql_user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the ksql_extra_template_vars param."
+}
+
 ###########################
 # RESTProxy Vars
 ###########################
@@ -835,6 +927,23 @@ variable "rest_proxy_jolokia_port" {
     description = "Port on which the Jolokia Agent is running"
 }
 
+#User Data
+variable "rest_proxy_extra_template_vars" {
+    type = map
+    default = {}
+}
+variable "rest_proxy_user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "rest_proxy_user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the rest_proxy_extra_template_vars param."
+}
+
 ###########################
 # Schema Registry Vars
 ###########################
@@ -943,4 +1052,21 @@ variable "schema_registry_jolokia_port" {
     type = number
     default = 7772
     description = "Port on which the Jolokia Agent is running"
+}
+
+#User Data
+variable "schema_registry_extra_template_vars" {
+    type = map
+    default = {}
+}
+variable "schema_registry_user_data_template" {
+    type = string
+    default = ""
+    description = "A Shell script to run upon instance startup"
+}
+
+variable "schema_registry_user_data_template_vars" {
+    type = map
+    default = {}
+    description = "A collection of variables to give to the user data template during render. These will be in addition to the vars already passed in the schema_registry_extra_template_vars param."
 }
