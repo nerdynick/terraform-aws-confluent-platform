@@ -5,7 +5,7 @@ provider "aws" {
     alias = "dns"
 }
 
-local {
+locals {
    component_name = "Schema Registry" 
    component_short_name = "sr"
 }
@@ -48,8 +48,8 @@ module "my_instance" {
     }
     
     extra_template_vars = merge({
-        component_name = var.component_name
-        component_short_name = var.component_short_name
+        component_name = local.component_name
+        component_short_name = local.component_short_name
     }, var.extra_template_vars)
     
     servers = var.servers

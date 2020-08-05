@@ -20,6 +20,9 @@ locals {
     monitoring_tags = merge(local.jolokia_tags, local.prometheus_tags)
 
     user_data_template_vars = merge({}, var.user_data_template_vars, var.extra_template_vars)
+    devices = join(",", [
+        for device in var.ebs_volumes: device.device_name
+    ])
 }
 data "template_file" "node_name" {
     count           = var.servers
@@ -47,7 +50,7 @@ data "template_file" "user_data" {
         "node_count" = "${count.index+1}"
         "node_name" = data.template_file.node_name[count.index].rendered
         "node_dns" =  data.template_file.node_dns[count.index].rendered
-        "node_devices" = var.ebs_volumes
+        "node_devices" = local.devices
     })
 }
 resource "aws_instance" "instance" {

@@ -62,3 +62,22 @@ The contained features around them will Setup Security Groups and EC2 instance t
 The EC2 tags are designed to allow you to use Prometheus' EC2 Service Discovery feature, 
 [as discussed here](https://medium.com/investing-in-tech/automatic-monitoring-for-all-new-aws-instances-using-prometheus-service-discovery-97d37a5b2ea2), 
 to find each component and automaticly start reading from that component.
+
+# How To
+
+## Provide User Data to EC2 Instances
+
+Each component has support to render a template and use that as the `user_data` that gets provided to created instances.
+These templates will be given a default set of varaibles, as outlined below, as well as any variables you add to the `extra_template_vars`, `*_extra_template_vars`, `user_data_template_vars`, `*_user_data_template_vars` variables. 
+Of note, the `extra_template_vars` and `user_data_template_vars` are treated as global collections, and will be provided to all components/sub_modules. 
+
+# Pre-Defined Template Varaibles
+
+| Variable             | Availability   | Desc |
+|:---------------------|:---------------|:-----|
+| node_count           | ALL            | Node index within the component's collection of nodes |
+| component_name       | ALL            | Full name of component. Ex: `Control Center`, `Zookeeper`, `Kafka Broker`  |
+| component_short_name | ALL            | Short name of component. Ex: `c3`, `zk`, `kfk`, `sr` |
+| node_name            | DNS, User_Data | The rendered node name template for the given instance |
+| node_dns             | User_Data      | The rendered node DNS template for the given instance |
+| node_devices         | User_Data      | Comma separated list of devices/volumes that will be attached to this instance |
