@@ -11,9 +11,6 @@ terraform {
     }
   }
 }
-provider "aws" {
-    alias = "dns"
-}
 
 module "cp-aws-zookeeper" {
     source = "./modules/zookeeper"

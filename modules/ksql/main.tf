@@ -3,7 +3,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.5.0"
-      configuration_aliases = [aws, aws.dns]
+      configuration_aliases = [aws.dns]
     }
     template = {
       source  = "hashicorp/template"
