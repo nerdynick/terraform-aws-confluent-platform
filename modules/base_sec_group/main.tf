@@ -1,5 +1,11 @@
-provider "aws" {
-    alias = "default"
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.5.0"
+      configuration_aliases = [aws.default]
+    }
+  }
 }
 
 locals {

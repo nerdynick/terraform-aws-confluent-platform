@@ -1,1 +1,3 @@
 .project
+.terraform.lock.hcl
+.terraform/
