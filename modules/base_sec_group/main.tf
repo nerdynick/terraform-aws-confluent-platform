@@ -3,7 +3,6 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.5.0"
-      configuration_aliases = [aws.default]
     }
   }
 }
@@ -14,7 +13,7 @@ locals {
     monitoring_port_range = concat(local.prometheus_port_range, local.jolokia_port_range)
 }
 resource "aws_security_group" "my_security_group" {
-    provider        = aws.default
+    provider        = aws
     count = var.enable_sg_creation ? 1 : 0
     name = var.sg_name
     description = "Confluent Platform - ${var.component_name}"

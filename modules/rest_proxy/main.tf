@@ -3,7 +3,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.5.0"
-      configuration_aliases = [aws.default, aws.dns]
+      configuration_aliases = [aws.dns]
     }
     template = {
       source  = "hashicorp/template"
@@ -21,7 +21,7 @@ module "my_sec_group" {
     source = "../base_sec_group"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
     }
     
     component_name = local.component_name
@@ -47,7 +47,7 @@ module "my_instance" {
     source = "../base_node"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
     

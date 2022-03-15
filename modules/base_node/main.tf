@@ -3,7 +3,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.5.0"
-      configuration_aliases = [aws.default, aws.dns]
+      configuration_aliases = [aws.dns]
     }
     template = {
       source  = "hashicorp/template"
@@ -61,7 +61,7 @@ data "template_file" "user_data" {
     })
 }
 resource "aws_instance" "instance" {
-    provider        = aws.default
+    provider        = aws
     count           = var.servers
     ami             = var.image_id
     instance_type   = var.instance_type
@@ -87,7 +87,7 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_ebs_volume" "instance_volume" {
-    provider        = aws.default
+    provider        = aws
     count = length(local.volumes_to_mount)
     
     availability_zone = aws_instance.instance[local.volumes_to_mount[count.index][0]].availability_zone
@@ -101,7 +101,7 @@ resource "aws_ebs_volume" "instance_volume" {
 }
 
 resource "aws_volume_attachment" "instance_volume_attach" {
-    provider        = aws.default
+    provider        = aws
     count = length(local.volumes_to_mount)
     
     device_name = local.volumes_to_mount[count.index][1].device_name

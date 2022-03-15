@@ -3,7 +3,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.5.0"
-      configuration_aliases = [aws.default, aws.dns]
+      configuration_aliases = [aws.dns]
     }
     template = {
       source  = "hashicorp/template"
@@ -11,12 +11,15 @@ terraform {
     }
   }
 }
+provider "aws" {
+    alias = "dns"
+}
 
 module "cp-aws-zookeeper" {
     source = "./modules/zookeeper"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
 
@@ -66,7 +69,7 @@ module "cp-aws-kafka_broker" {
     source = "./modules/kafka_broker"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
 
@@ -119,7 +122,7 @@ module "cp-aws-kafka_connect" {
     source = "./modules/kafka_connect"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
 
@@ -165,7 +168,7 @@ module "cp-aws-control_center" {
     source = "./modules/control_center"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
 
@@ -205,7 +208,7 @@ module "cp-aws-ksql" {
     source = "./modules/ksql"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
 
@@ -253,7 +256,7 @@ module "cp-aws-rest_proxy" {
     source = "./modules/rest_proxy"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
 
@@ -296,7 +299,7 @@ module "cp-aws-schema_registry" {
     source = "./modules/schema_registry"
     
     providers = {
-        aws.default = aws.default
+        aws = aws
         aws.dns = aws.dns
     }
 
